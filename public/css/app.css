@@ -41,6 +41,18 @@ h2 {
  
 }
 
+.locationPermission {
+ position: fixed;
+ float: left;
+ width: 200px;
+ height: 150px;
+ background-color: white;
+ z-index: 11;
+ top: 50%;
+ left: 30%;
+ display: block;
+}
+
 .floatingHouseInfo {
 background-color: rgba(248, 247, 216, 0.7);
 height: 100%;

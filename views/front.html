@@ -1,5 +1,10 @@
   <section ng-controller="SVImageController as svImage">
 
+
+
+
+  <container > <!-- ng-if="svImage.location" -->
+
   <div class="pane" id="pano"></div>
 
   <div class="floatingHouseInfo" ng-if="svImage.currentHouseSelection.data">
@@ -66,12 +71,7 @@
     </td>
   </tr>
 </table>
+</container>
 
-<div >
-   <p>for this app to work we need permission for your location</p>
-
-   {{svImage.location}}
-   <button>Share my Location</button>
-</div>
 
 </section>

@@ -137,7 +137,7 @@ function facebook(req, res) {
   var params = {
     code: req.body.code,
     client_id: req.body.clientId,
-    client_secret: process.env.FACEBOOK_API_SECRET,
+    client_secret: "95387fb666c67511f1ed52fefbd2a896",
     redirect_uri: config.appUrl + "/"
   };
   console.log(params);

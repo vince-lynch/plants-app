@@ -248,6 +248,8 @@ self.getCurrentPosition()
 
 
     self.createMarkers();
+
+
   }
 
 

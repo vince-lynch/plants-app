@@ -6,6 +6,9 @@ $( document ).ready(function() {
       getGeo();
     });
 
+
+    
+
 getGeo = function(){ 
    var options = {
      enableHighAccuracy: true,
