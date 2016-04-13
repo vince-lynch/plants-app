@@ -96,7 +96,7 @@ this.getCurrentPosition = function() {
 
       function success(pos) {
         crd = pos.coords;
-        $scope.location = crd.latitude + "," + crd.longitude;
+        self.location = crd.latitude + "," + crd.longitude;
         console.log('Your current position is:');
         console.log('Latitude : ' + crd.latitude);
         console.log('Longitude: ' + crd.longitude);
@@ -118,14 +118,14 @@ self.getCurrentPosition()
 
     var geocodeDelayTO = null;
 
-    $scope.location = "hello world";
+    self.location = "hello world";
     $scope.heading = 34;
     $scope.pitch = 10;
     $scope.fov = 90; 
     $scope.src = "http://maps.googleapis.com/maps/api/streetview?size=500x300&location=&fov=90";
   
   $scope.clearAll = function () {
-    $scope.location = crd.latitude + "," + crd.longitude;
+    self.location = crd.latitude + "," + crd.longitude;
     $scope.heading = 0;
     $scope.pitch = 0;
     $scope.fov = 90;
@@ -135,7 +135,7 @@ self.getCurrentPosition()
     $scope.updateSrc = function() {
       var data = [
         "http://maps.googleapis.com/maps/api/streetview?size=500x300",
-        "location=" + $scope.location
+        "location=" + self.location
       ];
 
       if ($scope.heading) {
@@ -157,7 +157,7 @@ self.getCurrentPosition()
 
       var latLongReg = /^\-?\d*\.?\d+\,\-?\d*\.?\d+$/,
  
-    newval = crd.longitude ? crd.latitude + "," + crd.longitude : $scope.location;
+    newval = crd.longitude ? crd.latitude + "," + crd.longitude : self.location;
 
       if (latLongReg.test(newval)) {
         var ll = newval.split(","),
@@ -227,9 +227,9 @@ self.getCurrentPosition()
     panorama.addListener("position_changed", function() {
       var pos = panorama.getPosition();
       var latLongString = [pos.lat(), pos.lng()].join(",");
-      if (latLongString !== $scope.location) {
+      if (latLongString !== self.location) {
         $scope.$apply(function() {
-          $scope.location = latLongString;
+          self.location = latLongString;
         });
       }
 
