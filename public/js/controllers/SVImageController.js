@@ -37,7 +37,6 @@ self.createMarkers = function(){
   
   google.maps.event.addListener(markers[i], 'click', function () {
       infowindow.open(map, markers[this.id])
-      alert(markers[this.id].description)
 
       var adID = (self.houses[this.id].adId).toString()
 
