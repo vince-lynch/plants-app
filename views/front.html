@@ -1,0 +1,70 @@
+  <section ng-controller="SVImageController as svImage">
+
+  <div class="pane" id="pano"></div>
+
+  <div class="floatingHouseInfo" ng-if="svImage.currentHouseSelection.data">
+  <button ng-click="svImage.currentHouseSelection = {}"> Back to Pararoma</button>
+      <ul>
+          <li ng-repeat="imgsrc in svImage.currentHouseSelection.data.data.photos">
+          <img ng-src="{{imgsrc}}" width="120px">
+          </li>
+      </ul>
+  </div>
+
+
+
+  </div>
+  <div class="pane" id="map"></div>
+  
+  
+</div>
+
+
+<table class="pane" id="locationform" ng-hide="svImage.wanthidden = true">
+  <tr>
+    <td>Location:</td>
+    <td>
+      <input ng-model="location" placeholder="Type address string or latitude,longitude" />
+    </td>
+  </tr>
+  <tr>
+    <td>Heading:</td>
+    <td>
+      <input ng-model="heading"
+             placeholder="value of 0-360 degrees with 0 representing North"/>
+    </td>
+  </tr>
+  <tr>
+    <td>Pitch:</td>
+    <td>
+      <input ng-model="pitch" placeholder="range from -90 to 90 with 0 is looking straight ahead." />
+    </td>
+  </tr>
+  <tr>
+    <td>Field of View/Zoom:</td>
+    <td>
+      <input ng-model="fov" 
+             placeholder="range from 90 to 0 with smaller numbers zooming in closer to center"/>
+    </td>
+  </tr>
+  <tr>
+    <td>Street View Image URL:</td>
+    <td>
+      <button ng-click="clearAll()">Update My Location</button>
+      <button ng-click="updateSrc()">Update Image</button>
+      <button ng-click="refreshAllMaps()">Update All</button>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      Copy and paste the URL in the textbox below for the image you want to use. 
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <input type="text" placeholder="Street View Image API URL" value="http://maps.googleapis.com/maps/api/streetview?location={{location}}&heading={{heading}}&pitch={{pitch}}&fov={{fov}}&size=640x480" style="width: 99%;"/>
+    </td>
+  </tr>
+</table>
+
+</section>

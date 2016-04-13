@@ -1,0 +1,31 @@
+{
+  "name": "angular-chat",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "mickyginger <mickyginger@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/ga-students/WDI_LDN_18_CLASSWORK",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.3",
+    "bootstrap": "^3.3.6",
+    "moment": "^2.12.0",
+    "angular-jwt": "^0.0.9",
+    "satellizer": "^0.14.0",
+    "angular-ui-router": "ui-router#^0.2.18",
+    "lodash": "^4.8.0"
+  },
+  "resolutions": {
+    "angular": "^1.2.16"
+  }
+}

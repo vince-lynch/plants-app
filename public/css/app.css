@@ -1,0 +1,428 @@
+body {
+  font-family: 'AsimovFont', Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 25px;
+  background-color: #ffffff;
+  color: #000000;
+  margin: 0;
+}
+
+a:link{
+  color:white;
+}
+a:visited{
+  color:white;
+}
+a:hover{
+  color:yellow;
+}
+a:focus{
+  color:yellow;
+}
+a:active{
+  color:white;
+}
+
+.quoteofday {
+  position: absolute;
+  margin-top: -200px;
+  text-align: center;
+  margin-left: -220px;
+}
+
+h1 {
+  color: #FFFFFF;
+  font-family: 'MolotFont', Helvetica, sans-serif;
+ margin-bottom: 50px;
+}
+h2 {
+  color: #FFFFFF;
+  font-family: 'MolotFont', Helvetica, sans-serif;
+ 
+}
+
+.floatingHouseInfo {
+background-color: rgba(248, 247, 216, 0.7);
+height: 100%;
+width: 20%;
+float: left;
+top: 0px;
+bottom: 0px;
+left: 0px;
+position: absolute;
+z-index: 3;
+}
+
+.pane {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 500px;
+} 
+div > input[type=text] {
+  width: 99%;
+  line-height: 1.8;
+}
+td > input {
+  width: 98%;
+}
+
+
+
+/*#locationform {
+  top: auto;
+  bottom: 0;
+  left: 0;
+
+}
+
+#pano {
+  left: auto;
+  right: 0;
+}
+*/
+#map {
+height: 500px;
+width: 100%;
+display: block;
+}
+
+
+.citypage {
+margin-top: 100px;
+}
+
+.green{
+color: green;
+}
+
+.red {
+  color: red;
+}
+
+.headerSearch {
+  color: #FFFFFF;
+  font-family: 'AsimovFont', Helvetica, sans-serif;
+ margin-bottom: 85px;
+}
+.col-md-4 {
+margin-top: 0px;
+}
+
+ul
+{
+    list-style-type: none;
+    text-align: left;
+}
+
+.facebook{
+  display: inline-block;
+  width: 75%;
+}
+
+.github{
+  display: inline-block;
+  width: 75%;
+}
+
+.instagram{
+  display: inline-block;
+  width: 75%;
+}
+
+.tint {
+ background-color: red;
+  top: 0px ;
+  left: 0px ;
+  right: 0px;
+  bottom: 0px;
+  width: 100%;
+  display: block;
+  height: 100%;
+}
+
+.front{
+  margin-top: 200px;
+}
+
+.row {
+  margin-top: 0px !important;
+}
+.tintTHIS {
+  background-color: rgba(33,0,5,0.5);
+  z-index: 3;
+  margin-top: -2000px;
+  width: 100%;
+  height: 4000px;
+  top: 0px ;
+  left: 0px ;
+  right: 0px;
+  bottom: 0px;
+  position: absolute;
+  float: left;
+  display: block;
+}
+
+.currentCity {
+  position: fixed;
+  font-size: 70px;
+  color: white;
+  text-align: center;
+  margin: auto 0;
+  margin-left: 15%;
+  
+  margin-top: 45%;
+}
+
+.col-md-3 img {
+  position: relative;
+   max-height: 100%;
+   max-width: 100%;
+   width: auto;
+   margin-left: 0px;
+   margin-right: 0px;
+   margin-top: 0px;
+   margin-bottom: 0px;
+
+}
+
+.col-md-3 {
+  margin-left: -35px;
+  margin-right: -35px;
+  margin-top: -35px;
+  margin-bottom: -35px;
+  z-index: 1;
+
+}
+
+
+
+.loginHeader {
+  position: relative;
+  top: 32px;
+  font-size: 46px;
+  color: black;
+  font-family: MolotFont, Helvetica, sans-serif;
+  align-self: center;
+  text-align: center;
+  display: inline-block;
+}
+
+.loginTagline{
+  display: inline-block;
+  position: relative;
+  margin-top: 30px;
+  font-family: 'AsimovFont', Helvetica;
+  font-size: 17px;
+  color: black;
+  text-align: center;
+}
+
+.centered {
+  display: block;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  width: 350px;
+  height: 400px;
+  border-radius: 3px;
+  -webkit-box-shadow: 1px 2px 18px -2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 2px 18px -2px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 2px 18px -2px rgba(0, 0, 0, 0.75); 
+  font-family: 'AsimovFont', 'MolotFont';
+  color: black;
+  text-align: center;
+  z-index: 10;
+}
+
+.citydescription{
+  font-size: 14px;
+  width: 400px;
+  text-align: left;
+  margin-left: 150px;
+}
+
+.fa-star {
+  color: yellow;
+}
+
+.searchButton {
+  margin-top: 45px;
+}
+
+
+main {
+  margin: auto 0;
+  text-align: center;
+}
+
+/*footer {
+  background-color: red;
+  position: absolute;
+  height: 150px;
+  width:100%;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  z-index: 10;
+}*/
+
+a {
+  color: #D7DADB;
+}
+
+
+
+@font-face {
+  font-family: 'AsimovFont';
+  src: url('../fonts/Asimov.otf'); 
+}
+
+@font-face {
+  font-family: 'MolotFont';
+  src: url('../fonts/Molot.otf'); 
+}
+
+.content {
+  position: fixed;
+  margin-top: 220px;
+  padding: 0 10px;
+  background: (rgba(255, 0, 0, 0.45), rgba(255, 0, 0, 0.45));
+}
+
+
+/*__MENU STYLES__*/
+#menu-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+#menu-bar {
+  display: block;
+  width: 100%;
+  height: 10px;
+  background-color: #000201;
+}
+
+#menu-tab {
+  background-color: #000201;
+  cursor: pointer;
+  float: right;
+  padding: 5px 10px;
+  border-radius: 0 0 5px 5px;
+}
+
+#menu-nav {
+  display: none;
+  padding: 5px 10px;
+  background-color: #FC4349;
+  color: #333333;
+}
+
+#menu-nav ul {
+  list-style: none;
+  margin: 20px 0 30px;
+  padding: 0;
+}
+
+#menu-nav ul li{
+  padding: 10px;
+  border-bottom: 1px solid #E03C41;
+  cursor: pointer;
+  text-align: center;
+}
+
+#menu-nav ul li:first-child{
+  border-top: 1px solid #E03C41;
+}
+
+#menu-nav ul li:hover{
+  background-color: #EB3E44;
+}
+
+
+.avatar {
+  border-radius: 100px;
+  max-width: 20vh;
+}
+logo {
+  font-family: 'Lobster', cursive;
+  font-size: 12vh;
+}
+
+.instaPhoto {
+overflow: hidden;
+}
+.instaPhoto img{
+margin-top: 0px;
+width: 250px;
+}
+
+.topNavLoginBar {
+  align-self: left;
+  left: 0px;
+  top: 0px;
+  margin-left: 0px;
+  margin-top: 35px;
+  position: absolute;
+  z-index: 2;
+  text-align: right;
+}
+
+#message-panel {
+  height: calc(80vh - 50px);
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  overflow-y: scroll;
+  position: relative;
+}
+
+#message-panel ul {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+#message-panel ul li{
+  padding: 3px 12px;
+  width: calc(100% - 8px);
+  border-radius: 4px;
+  background-color: #eee;
+  margin: 4px;
+}
+
+#message-panel ul li span.message {
+  display: inline-block;
+  width: 75%;
+}
+
+#message-panel ul li span.username {
+  display: inline-block;
+  width: calc(25% - 4px);
+  text-align: right;
+  color: #bbb;
+  font-weight: 600;
+}
+
+#message-panel ul li.me {
+  text-align: right;
+  background-color: rgba(0, 221, 0, 0.6);
+}
+
+.form-inline .form-group {
+  width: 80%;
+}
+
+.form-inline .form-control {
+  width: 100%;
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html ng-app="VinceLynch">
+<head>
+
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Mono:500' rel='stylesheet' type='text/css'>
+
+  <!-- External Modules -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6eFUCAvihA4XE4rGNJj1_Qs2km9zXZSs&callback=initialize">
+  </script>
+  <script src="/vendor/jquery.js"></script>
+  <script src="/vendor/angular.js"></script>
+  <script type="text/javascript" src="/vendor/angular-resource.js"></script>
+  <script src="/vendor/angular-route.min.js"></script>
+  <script src="/vendor/angular-jwt/dist/angular-jwt.min.js"></script>
+  <script src="/vendor/satellizer/satellizer.min.js"></script>
+  <script src="/vendor/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="/vendor/lodash/dist/lodash.js"></script>
+  <script src="/vendor/angular-rangeslider/angular.rangeSlider.js"></script>
+
+  <!-- External CSS Frameworks -->
+  <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>  
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/angular-rangeslider/angular.rangeSlider.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.css
+">
+
+  <!-- Google Charts -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+  <!-- Angular RangeSliders -->
+  <script src="/vendor/rzslider.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/css/rzslider.min.css">
+
+  <!-- Internal Modules -->
+  <script src="/js/app.js"></script>
+   <script src="/js/controllers/mainController.js"></script>
+
+   <script src="/js/controllers/SVImageController.js"></script>
+   <script src="/js/services/oauthKeys.js"></script>
+   <script src="/js/services/token.js"></script>
+   <script src="/js/jquery.js"></script>
+   <link rel="stylesheet" type="text/css" href="/css/app.css">
+
+
+
+</head>
+
+<body ng-controller="MainController as main">
+
+
+<div id="menu-wrapper">
+  <div id="menu-bar"></div>
+  
+  <div id="menu-nav" ng-show="main.isLoggedIn()">
+    <ul>
+    <li > <a ui-sref-active="active" ui-sref="front">Front</a></li>
+    <li ng-click="main.getGeo()"><a>GetGeo()</a></li>
+    </ul>
+  </div>
+    <div id="menu-tab" class="closed">MENU</div>
+  </div>
+
+  <!-- AVATAR in NAV -->
+  <section class="topNavLoginBar">
+        <img ng-src="{{ main.currentUser.picture }}" class="avatar">
+        <div ng-show="main.isLoggedIn()">
+        <strong>{{ main.currentUser.name }}</strong>
+        <a ng-click="main.logout()"><i class="fa fa-sign-out"></i>(Logout)</a>
+    </div>
+  </section>
+
+<hr>
+<div class="container">
+  <div ng-show="!main.isLoggedIn()">
+
+
+  </div>
+</div>
+<div ng-hide="main.isLoggedIn()">
+
+
+
+
+<script>
+  $(document).on('click', '#menu-tab', function () {
+    $('#menu-nav').slideToggle('slow');
+  });
+</script>
+
+
+
+
+
+
+  <section class="centered" ng-show="!main.isLoggedIn()">
+    <div ng-hide="main.isLoggedIn()">
+   
+        <span class="loginHeader">locationhomes</span>
+        <span class="loginTagline"> Login
+  
+        
+         </span>        
+        <hr>
+        <button class="facebook" ng-click="main.authenticate('facebook')"><i class="fa fa-facebook-square"></i> Sign in with Facebook</button>
+
+        <button class="instagram" ng-click="main.authenticate('instagram')"><i class="fa fa-instagram"></i> Sign in with Insgram</button>
+        <p>
+     
+    </div>
+
+  
+
+
+  </div> <!--  END OF TINT THIS -->
+
+</div>
+  
+ <main ui-view ng-show="main.isLoggedIn()">
+
+
+ </main> 
+
+
+<footer>
+
+</footer>
+
+
+</body>
+</html>

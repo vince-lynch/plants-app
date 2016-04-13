@@ -1,0 +1,19 @@
+
+<h1>Instagrams By City</h1>
+{{main.helloworld}}
+
+
+<input type="button" value="Show Location"
+    ng-click="main.showlocation()" />   <br/>
+ 
+Latitude: <span id="latitude">{{main.currentLocation.lat}}</span>       <br/>
+ 
+Longitude: <span id="longitude">{{main.currentLocation.lng}}</span>
+...
+
+<container class="container">
+<div class="col-md-4 instaPhoto" ng-repeat="src in main.instagrams track by $index">
+  <img ng-src="{{src}}"/>
+</div>
+</container>
+
