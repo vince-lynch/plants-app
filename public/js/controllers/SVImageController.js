@@ -12,7 +12,7 @@ self.createMarkers = function(){
   console.log("Markers from DB Function called")
   $http({
     method: 'GET',
-    url: 'http://localhost:8000/api/properties'
+    url: '/api/properties'
   }).then(function successCallback(response) {
       self.houses = response.data;
       console.log(self.houses);
@@ -42,7 +42,7 @@ self.createMarkers = function(){
 
     $http({
       method: 'GET',
-      url: 'http://localhost:8000/api/idealIndivAd/' + adID
+      url: '/api/idealIndivAd/' + adID
     }).then(function successCallback(response) {
 
      self.currentHouseSelection = response; 
