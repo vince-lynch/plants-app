@@ -127,10 +127,10 @@ function idealista(req,res){
              });
 
             
-  /* SAVE THE RESULT TO MONGOOOSEEEEE!!!*/
+          /* SAVE THE RESULT TO MONGOOOSEEEEE!!!*/
 
            });
-         }, 900);
+         }, 7000);
        });
      });
    });
