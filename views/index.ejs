@@ -103,7 +103,14 @@
         <hr>
         <button class="facebook" ng-click="main.authenticate('facebook')"><i class="fa fa-facebook-square"></i> Sign in with Facebook</button>
 
-        <button class="instagram" ng-click="main.authenticate('instagram')"><i class="fa fa-instagram"></i> Sign in with Insgram</button>
+       <div ng-controller="SVImageController as svImage">
+          <p>for this app to work we need permission for your location</p>
+
+          {{svImage.location}}
+          <button>Share my Location</button>
+       </div>
+
+
         <p>
      
     </div>

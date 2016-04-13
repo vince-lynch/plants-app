@@ -118,7 +118,7 @@ self.getCurrentPosition()
 
     var geocodeDelayTO = null;
 
-    $scope.location = "42.345573,-71.098326";
+    $scope.location = "hello world";
     $scope.heading = 34;
     $scope.pitch = 10;
     $scope.fov = 90; 
