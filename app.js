@@ -46,8 +46,6 @@ app.get('/', function(req, res) {
 
 
 
-app.use('/scripts/gifshot', express.static(__dirname + '/node_modules/gifshot/build/'));
-
 app.use('/', router);
 
 server.listen(port, function() {
