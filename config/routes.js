@@ -10,13 +10,13 @@ router.post('/auth/instagram', authController.instagram);
 
 
 // route for detailed city data
-router.get('/api/numtable/:city/:country', apiController.numtable);
+router.get('/api/plants', apiController.getAll);
+router.route('/api/plants').post(apiController.create);
 
-router.get('/api/idealista', apiController.idealista);
-
-router.get('/api/idealIndivAd/:id', apiController.idealistaIndividualAD);
-
-router.get('/api/properties', apiController.getAll);
+router.route('/api/plants/:email')
+  .get(apiController.show)
+  .put(apiController.update)
+  .delete(apiController.delete);
 
 
 

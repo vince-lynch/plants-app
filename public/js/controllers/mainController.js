@@ -20,9 +20,35 @@ function MainController($auth, tokenService, $resource, $window, $state, GEOCODE
   self.currentweatherstate = "";
   self.currentweathercode = 0;
   self.currentweathertemp = 0;
-
   $scope.sunny = true;
+  self.username = "someone@somewherestring.com";
 
+  self.updatePlant = function(){
+    $http({
+      method: 'PUT',
+      url: '/api/plants/' + self.username + '',
+      data: {plantHealth: self.wateringCount},
+    }).then(function successCallback(response) {
+      console.log("updated plants settings " + response);
+      }, function errorCallback(response) {
+        console.log("failed to update plants settings " + response);
+      });
+  }
+
+  self.getPlant = function(){
+    $http({
+      method: 'GET',
+      url: '/api/plants/' + self.username + '',
+    }).then(function successCallback(response) {
+      console.log(response);
+      self.wateringCount = response.data.message.plantHealth;
+      console.log(self.wateringCount)
+      $scope.plantStatus();
+      }, function errorCallback(response) {
+
+      });
+
+  }
 
   self.changeweathergraphic = function(){
 
@@ -84,6 +110,77 @@ function MainController($auth, tokenService, $resource, $window, $state, GEOCODE
   }
 
   self.getWeather();
+
+  $scope.plantStatus = function(){
+    console.log("plant status function called")
+    if (self.wateringCount == 1){
+      self.seg1 = true;
+    }
+    if (self.wateringCount == 2){
+      self.seg1 = true;
+      self.seg2 = true;
+    }
+    if (self.wateringCount == 3){
+      self.seg1 = true;
+      self.seg2 = true;
+      self.seg3 = true;
+    }
+    if (self.wateringCount == 4){
+      self.seg1 = true;
+      self.seg2 = true;
+      self.seg3 = true;
+      self.seg4 = true;
+    }
+    if (self.wateringCount == 5){
+      self.seg1 = true;
+      self.seg2 = true;
+      self.seg3 = true;
+      self.seg4 = true;
+      self.seg5 = true;
+    }
+    if (self.wateringCount == 6){
+      self.seg1 = true;
+      self.seg2 = true;
+      self.seg3 = true;
+      self.seg4 = true;
+      self.seg5 = true;
+      self.seg6 = true;
+    }
+    if (self.wateringCount == 7){
+      self.seg1 = true;
+      self.seg2 = true;
+      self.seg3 = true;
+      self.seg4 = true;
+      self.seg5 = true;
+      self.seg6 = true;
+      self.seg7 = true;
+    }
+    if (self.wateringCount == 8){
+      self.seg7 = true;
+    }
+    if (self.wateringCount == 9){
+      self.seg12 = true;
+    }
+    if (self.wateringCount == 10){
+      self.seg8 = true;
+    }
+    if (self.wateringCount == 11){
+      self.seg13 = true;
+    }
+    if (self.wateringCount == 12){
+      self.seg9 = true;
+    }
+    if (self.wateringCount == 13){
+      self.seg14 = true;
+    }
+    if (self.wateringCount == 14){
+      self.seg10 = true;
+    }
+    if (self.wateringCount == 15){
+      self.seg15 = true;
+    }
+  }
+
 
   $scope.growplant = function(){
     console.log("function called")
