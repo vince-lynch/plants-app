@@ -51,7 +51,8 @@
     <div class="shape wateringcan" callback-fn="growplant()" ng-draggable='dragOptions'></div>
 
 </div>
-
+{{main.currentweatherstate}}
+{{main.currentweathertemp| number:0}}  °C
 <div class="container">
   <div class="sunny" ng-show="sunny"></div> 
  <div class="cloudy" ng-show="cloudy"></div>
