@@ -17,6 +17,7 @@ function MainController($auth, tokenService, $resource, $window, $state, GEOCODE
   self.seg10 = true;
   self.seg11 = true;*/
   self.wateringCount = 0;
+  $scope.sunny = true;
 
   $scope.growplant = function(){
     console.log("function called")
