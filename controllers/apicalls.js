@@ -29,8 +29,17 @@ function plantsCreate(req, res){
 }
 */
 
+function plantsLocationUpdate(req, res){
+  Plant.findOneAndUpdate({email: req.params.email}, {$set:{palmX:req.body.palmX, palmY: req.body.palmY}}, {new: true}, function(err, plant){
+      if(err){
+          return res.status(500).json({message: err});
+      }
+      return res.status(201).json({message: plant});
+  });
+}
+
 function plantsUpdate(req, res){
-  Plant.findOneAndUpdate({email: req.params.email}, {$set:{plantHealth:req.body.plantHealth}}, {new: true}, function(err, plant){
+  Plant.findOneAndUpdate({email: req.params.email}, {$set:{plantHealth:req.body.plantHealth, lastwatered: req.body.lastwatered}}, {new: true}, function(err, plant){
       if(err){
           return res.status(500).json({message: err});
       }
@@ -53,8 +62,18 @@ function plantsPatch(req, res){
 
 function plantsShow(req, res){
     Plant.findOne({ 'email': req.params.email }, function(err, plant){
-    if(err) return  res.status(500).json({message: err});
-    return res.status(201).json({message: plant});
+    if(err) return  res.status(500).json({message: "nothing to show"});
+      if (plant == null){
+        console.log("user doesnt exist")
+        email = req.params.email
+        Plant.create({email: email}, function(err, plant){
+          if(err) return res.status(500).json({message: err});
+          if(!plant) return res.status(400).json({message:" Invalid data"});
+          return res.status(201).json({message: plant});
+        });
+      } else {
+        return res.status(201).json({message: plant});
+      }
     });
   }
 
@@ -72,5 +91,6 @@ function plantsDelete(req, res){
      create: plantsCreate,
      update: plantsUpdate,
      show: plantsShow,
-     delete: plantsDelete
+     delete: plantsDelete,
+     locationUpdate:plantsLocationUpdate
    };

@@ -1,8 +1,8 @@
 angular.module('VinceLynch')
 .controller('MainController', MainController);
 
-MainController.$inject = ['$auth', 'tokenService', '$resource', '$window', '$state', 'GEOCODER_API_KEY', '$http', 'GUARDIAN_API_KEY', '$window','$scope'];
-function MainController($auth, tokenService, $resource, $window, $state, GEOCODER_API_KEY, $http, GUARDIAN_API_KEY, $window,$scope) {
+MainController.$inject = ['$auth', 'tokenService', '$resource', '$window', '$state', 'GEOCODER_API_KEY', '$http', 'GUARDIAN_API_KEY', '$window','$scope', '$document'];
+function MainController($auth, tokenService, $resource, $window, $state, GEOCODER_API_KEY, $http, GUARDIAN_API_KEY, $window,$scope,$document) {
   var self = this;
   self.helloworld = "hello world";
 /* self.seg1 = true;
@@ -22,12 +22,44 @@ function MainController($auth, tokenService, $resource, $window, $state, GEOCODE
   self.currentweathertemp = 0;
   $scope.sunny = true;
   self.username = "someone@somewherestring.com";
+  self.lastwatered = "never before";
+
+  self.palmX = 0;
+  self.palmY = 0;
+
+  $scope.field = {};
+/*  $scope.field.left = 0;
+  $scope.field.top = 0;*/
+
+  $scope.storePalmLocation = function(){
+    console.log("awesome storing palm location" + $window.palmX + "x axis" + $window.palmY + "y axis")
+    self.palmX = $window.palmX;
+    self.palmY = $window.palmY;
+    $http({
+      method: 'PUT',
+      url: '/api/plantslocation/' + self.username + '',
+      data: {palmX: self.palmX, palmY: self.palmY},
+    }).then(function successCallback(response) {
+      console.log("updated palm location to DB " + response);
+      }, function errorCallback(response) {
+        console.log("failed to update palm location to DB " + response);
+      });
+  }
+
+
+  self.moveTree = function(){
+    var left = self.palmX + "px";
+    var top = self.palmY + "px";
+    $scope.field = {top:top, left};
+  }
+
 
   self.updatePlant = function(){
+    var currenttime = Date();
     $http({
       method: 'PUT',
       url: '/api/plants/' + self.username + '',
-      data: {plantHealth: self.wateringCount},
+      data: {plantHealth: self.wateringCount, lastwatered: currenttime},
     }).then(function successCallback(response) {
       console.log("updated plants settings " + response);
       }, function errorCallback(response) {
@@ -42,8 +74,28 @@ function MainController($auth, tokenService, $resource, $window, $state, GEOCODE
     }).then(function successCallback(response) {
       console.log(response);
       self.wateringCount = response.data.message.plantHealth;
+      if (response.data.message.lastwatered == undefined){
+        self.lastwatered = Date();
+      } else {
+        self.lastwatered = response.data.message.lastwatered;
+      }
+      self.palmX = response.data.message.palmX;
+      self.palmY = response.data.message.palmY;
+      self.moveTree();
+
+      var lasttimemin = self.lastwatered.split(" ")[4].split(":")[1];
+      var lasttimeHrs = self.lastwatered.split(" ")[4].split(":")[0];
+     var timenow = Date().split(" ")[4].split(":");
+     var minutesAgo = (timenow[1]) - (parseInt(lasttimemin));
+     var hoursAgo = (timenow[0]) - (parseInt(lasttimeHrs))
+     console.log(minutesAgo + " minutes ago since last watered");
+     console.log(hoursAgo + " hours ago since last watered");
+
+     self.wateringCount = self.wateringCount - hoursAgo;
+     if (self.wateringCount < 0){ self.wateringCount = 0}
       console.log(self.wateringCount)
       $scope.plantStatus();
+      $state.go("plants")
       }, function errorCallback(response) {
 
       });
@@ -113,6 +165,10 @@ function MainController($auth, tokenService, $resource, $window, $state, GEOCODE
 
   $scope.plantStatus = function(){
     console.log("plant status function called")
+    if (self.wateringCount > 15){
+      self.wateringCount = 15;
+    }
+
     if (self.wateringCount == 1){
       self.seg1 = true;
     }
@@ -156,35 +212,132 @@ function MainController($auth, tokenService, $resource, $window, $state, GEOCODE
       self.seg7 = true;
     }
     if (self.wateringCount == 8){
+      self.seg1 = true;
+      self.seg2 = true;
+      self.seg3 = true;
+      self.seg4 = true;
+      self.seg5 = true;
+      self.seg6 = true;
       self.seg7 = true;
-    }
-    if (self.wateringCount == 9){
-      self.seg12 = true;
-    }
-    if (self.wateringCount == 10){
       self.seg8 = true;
     }
-    if (self.wateringCount == 11){
-      self.seg13 = true;
-    }
-    if (self.wateringCount == 12){
+    if (self.wateringCount == 9){
+      self.seg1 = true;
+      self.seg2 = true;
+      self.seg3 = true;
+      self.seg4 = true;
+      self.seg5 = true;
+      self.seg6 = true;
+      self.seg7 = true;
+      self.seg8 = true;
       self.seg9 = true;
     }
-    if (self.wateringCount == 13){
-      self.seg14 = true;
-    }
-    if (self.wateringCount == 14){
+    if (self.wateringCount == 10){
+      self.seg1 = true;
+      self.seg2 = true;
+      self.seg3 = true;
+      self.seg4 = true;
+      self.seg5 = true;
+      self.seg6 = true;
+      self.seg7 = true;
+      self.seg8 = true;
+      self.seg9 = true;
       self.seg10 = true;
     }
+    if (self.wateringCount == 11){
+      self.seg1 = true;
+      self.seg2 = true;
+      self.seg3 = true;
+      self.seg4 = true;
+      self.seg5 = true;
+      self.seg6 = true;
+      self.seg7 = true;
+      self.seg8 = true;
+      self.seg9 = true;
+      self.seg10 = true;
+      self.seg11 = true;
+    }
+    if (self.wateringCount == 12){
+      self.seg1 = true;
+      self.seg2 = true;
+      self.seg3 = true;
+      self.seg4 = true;
+      self.seg5 = true;
+      self.seg6 = true;
+      self.seg7 = true;
+      self.seg8 = true;
+      self.seg9 = true;
+      self.seg10 = true;
+      self.seg11 = true;
+      self.seg12 = true;
+    }
+    if (self.wateringCount == 13){
+      self.seg1 = true;
+      self.seg2 = true;
+      self.seg3 = true;
+      self.seg4 = true;
+      self.seg5 = true;
+      self.seg6 = true;
+      self.seg7 = true;
+      self.seg8 = true;
+      self.seg9 = true;
+      self.seg10 = true;
+      self.seg11 = true;
+      self.seg12 = true;
+      self.seg13 = true;
+    }
+    if (self.wateringCount == 14){
+      self.seg1 = true;
+      self.seg2 = true;
+      self.seg3 = true;
+      self.seg4 = true;
+      self.seg5 = true;
+      self.seg6 = true;
+      self.seg7 = true;
+      self.seg8 = true;
+      self.seg9 = true;
+      self.seg10 = true;
+      self.seg11 = true;
+      self.seg12 = true;
+      self.seg13 = true;
+      self.seg14 = true;
+    }
     if (self.wateringCount == 15){
+      self.seg1 = true;
+      self.seg2 = true;
+      self.seg3 = true;
+      self.seg4 = true;
+      self.seg5 = true;
+      self.seg6 = true;
+      self.seg7 = true;
+      self.seg8 = true;
+      self.seg9 = true;
+      self.seg10 = true;
+      self.seg11 = true;
+      self.seg12 = true;
+      self.seg13 = true;
+      self.seg14 = true;
       self.seg15 = true;
     }
+    //self.updatePlant()
   }
 
 
   $scope.growplant = function(){
-    console.log("function called")
-    self.wateringCount ++;
+    console.log("growPLANT function called")
+
+     var lasttimemin = self.lastwatered.split(" ")[4].split(":")[1];
+     var lasttimeHrs = self.lastwatered.split(" ")[4].split(":")[0];
+    var timenow = Date().split(" ")[4].split(":");
+    var minutesAgo = (timenow[1]) - (parseInt(lasttimemin));
+    var hoursAgo = (timenow[0]) - (parseInt(lasttimeHrs))
+    console.log(minutesAgo + " minutes ago since last watered");
+    console.log(hoursAgo + " hours ago since last watered");
+    
+    if (minutesAgo > 8 || hoursAgo > 1 ){
+      self.wateringCount ++;
+    }
+
     if (self.wateringCount == 1){
       self.seg1 = true;
     }
@@ -231,6 +384,7 @@ function MainController($auth, tokenService, $resource, $window, $state, GEOCODE
       self.seg15 = true;
     }
     $scope.$apply();
+    self.updatePlant()
   }
 
   $scope.dragOptions = {

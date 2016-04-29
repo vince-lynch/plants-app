@@ -18,6 +18,7 @@ router.route('/api/plants/:email')
   .put(apiController.update)
   .delete(apiController.delete);
 
-
+router.route('/api/plantslocation/:email').put(apiController.locationUpdate);
+  
 
 module.exports = router;
