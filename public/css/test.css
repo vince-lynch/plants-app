@@ -1,56 +1,3 @@
-#message-panel {
-  height: calc(80vh - 50px);
-  border: 1px solid #ddd;
-  margin-bottom: 20px;
-  border-radius: 4px;
-  overflow-y: scroll;
-  position: relative;
-}
-
-#message-panel ul {
-  margin: 0;
-  padding: 0;
-
-  list-style: none;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
-
-#message-panel ul li{
-  padding: 3px 12px;
-  width: calc(100% - 8px);
-  border-radius: 4px;
-  background-color: #eee;
-  margin: 4px;
-}
-
-#message-panel ul li span.message {
-  display: inline-block;
-  width: 75%;
-}
-
-#message-panel ul li span.username {
-  display: inline-block;
-  width: calc(25% - 4px);
-  text-align: right;
-  color: #bbb;
-  font-weight: 600;
-}
-
-#message-panel ul li.me {
-  text-align: right;
-  background-color: rgba(0, 221, 0, 0.6);
-}
-
-.form-inline .form-group {
-  width: 80%;
-}
-
-.form-inline .form-control {
-  width: 100%;
-}
-
 
 
 buildpalm {
@@ -254,9 +201,8 @@ buildpalm {
   height: 140px;
   width: 20px;
   position: absolute;
-  top: -50px;
-/*  left: 400px;
-  top: -550px;*/
+  left: 400px;
+  top: -550px;
 }
 
 .sunny:before {
@@ -315,10 +261,10 @@ buildpalm {
   box-shadow: #FFFFFF 65px -15px 0 -5px,  #FFFFFF 25px -25px,  #FFFFFF 30px 10px,  #FFFFFF 60px 15px 0 -10px,  #FFFFFF 85px 5px 0 -5px;
   height: 50px;
   width: 50px;
-/*  margin-left: -60px;*/
+  margin-left: -60px;
   position: absolute;
-/*  left: 400px;
-  top: -500px;*/
+  left: 400px;
+  top: -500px;
 }
 
 .cloudy:after {
@@ -374,11 +320,11 @@ buildpalm {
   display: block;
   height: 50px;
   width: 50px;
-/*  margin-left: -60px;*/
+  margin-left: -60px;
   position: absolute;
   position: absolute;
-/*  left: 400px;
- top: -340px;*/
+  left: 400px;
+ top: -340px;
 }
 
 .rainy:after {
@@ -498,10 +444,10 @@ buildpalm {
   box-shadow: #FB323C -2px -2px 0 1px, #F99716 -4px -4px 0 3px, #FEE124 -6px -6px 0 5px, #AFDF2E -8px -8px 0 7px, #6AD7F8 -10px -10px 0 9px, #60B1F5 -12px -12px 0 11px, #A3459B -14px -14px 0 13px;
   height: 70px;
   width: 70px;
-/*  margin-left: -40px;*/
+  margin-left: -40px;
   position: absolute;
-/*  left: 400px;
-  top: -340px;*/
+  left: 400px;
+  top: -340px;
   -webkit-transform: rotate(40deg);
           transform: rotate(40deg);
 }
@@ -560,12 +506,11 @@ buildpalm {
   box-shadow: #FFFFFF 26px 7px 0 -1px, rgba(255, 255, 255, 0.1) -36px -19px 0 -1px, rgba(255, 255, 255, 0.1) -51px -34px 0 -1px, #FFFFFF -52px -62px 0 -1px, #FFFFFF 14px -37px, rgba(255, 255, 255, 0.1) 41px -19px, #FFFFFF 34px -50px, rgba(255, 255, 255, 0.1) 14px -71px 0 -1px, #FFFFFF 64px -21px 0 -1px, rgba(255, 255, 255, 0.1) 32px -85px 0 -1px, #FFFFFF 64px -90px, rgba(255, 255, 255, 0.1) 60px -67px 0 -1px, #FFFFFF 34px -127px, rgba(255, 255, 255, 0.1) -26px -103px 0 -1px;
   height: 4px;
   width: 4px;
-/*  margin-left: -10px;*/
+  margin-left: -10px;
   opacity: 1;
   position: absolute;
-  top:50px;
-/*  left: 400px;
-  top: -300px;*/
+  left: 400px;
+  top: -300px;
 }
 
 .starry:after {
@@ -616,10 +561,10 @@ buildpalm {
   box-shadow: #222222 65px -15px 0 -5px,  #222222 25px -25px,  #222222 30px 10px,  #222222 60px 15px 0 -10px,  #222222 85px 5px 0 -5px;
   height: 50px;
   width: 50px;
- /* margin-left: -60px;*/
+  margin-left: -60px;
   position: absolute;
-/*  left: 400px;
-  top: -340px;*/
+  left: 400px;
+  top: -340px;
 }
 
 .stormy:after {
@@ -739,10 +684,10 @@ buildpalm {
   display: block;
   height: 50px;
   width: 50px;
-/*  margin-left: -60px;*/
+  margin-left: -60px;
   position: absolute;
-/*  left: 400px;
-  top: -340px;*/
+  left: 400px;
+  top: -340px;
 }
 
 .snowy:after {
@@ -922,14 +867,12 @@ a {
   display: none;
 }
 
-.weathersymbol {
+.container {
 /*background: -webkit-linear-gradient(left, #00BBFF, #00BBFF 14.3%, #2EB5E5 14.3%, #2EB5E5 28.6%, #E6E6E6 28.6%, #E6E6E6 42.9%, #F3D166 42.9%, #F3D166 57.2%, #222233 57.2%, #222233 71.5%, #444444 71.5%, #444444 85.8%, #85DB8C 85.8%);
   background: linear-gradient(left, #00BBFF, #00BBFF 14.3%, #2EB5E5 14.3%, #2EB5E5 28.6%, #E6E6E6 28.6%, #E6E6E6 42.9%, #F3D166 42.9%, #F3D166 57.2%, #222233 57.2%, #222233 71.5%, #444444 71.5%, #444444 85.8%, #85DB8C 85.8%);*/
   -webkit-transform: scale(0.9);
           transform: scale(0.9);
-  width: 210px;
-  position: relative;
+  width: 1200px;
+  position: absolute;
   height: 210px;
-  left: 600px;
 }
-

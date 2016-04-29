@@ -1,0 +1,116 @@
+<main class="container2">
+    <h1>Login</h1>
+
+    <div ng-hide="main.hasSetUsername">
+      <form ng-submit="main.setUsername()">
+        <div class="form-group">
+          <input ng-model="main.username" class="form-control" placeholder="Username">
+        </div>
+
+        <button class="btn btn-primary">Start Chatting!</button>
+      </form>
+    </div>
+
+    <div ng-show="main.hasSetUsername">
+      <div id="message-panel">
+        <ul>
+          <li ng-repeat="message in main.messages track by $index" ng-class="{ me: message.username === main.username }">
+            <span class="message">{{ message.text }}</span>
+            <span class="username">{{ message.username }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <form ng-submit="main.sendMessage()" class="form-inline">
+        <div class="form-group">
+          <input ng-model="main.message" class="form-control">
+        </div>
+
+        <button class="btn btn-primary">Send</button>
+      </form>
+    </div>
+
+  </main>
+
+
+
+  <!-- <button ng-click="main.getPlant()">Login</button> -->
+
+  <!-- <button ng-click="main.updatePlant()">update plant</button>
+  <input type="text" ng-model="main.username">
+   -->
+
+
+  <div id="container">
+
+
+  <!-- <svg id="shelf" width="100%" height="20">
+    <rect width="100%" height="20" style="fill:rgb(0,0,0);stroke-width:3;stroke:rgb(0,0,0)" />
+  </svg> -->
+
+  <div>
+    <h2>Your plants</h2>
+  <!--   <img ng-draggable src="http://izaak.jellinek.com/tuxes/images/big%20tux.png"/>
+    <img ng-draggable src="http://fc00.deviantart.net/fs70/i/2012/135/a/7/tux_button_by_blacklite_teh_haxxor-d4zv3fv.png"/>
+    <span ng-draggable>Drag me!</span>
+    <span ng-draggable>Or me!</span> -->
+    <div class="weathersymbol" ng-draggable id="weather" name="weather">
+      <div class="sunny" ng-show="sunny"></div> 
+     <div class="cloudy" ng-show="cloudy"></div>
+      <div class="rainy" ng-show="rainy"></div>
+      <div class="snowy" ng-show="snowy"></div>
+      <div class="rainbow" ng-show="rainbow"></div>
+      <div class="starry" ng-show="starry"></div>
+      <div class="stormy" ng-show="stormy"></div>
+    </div>
+    <buildpalm ng-draggable name="palm" id="palmtree" callback-fn="storePalmLocation(x,y)" style="position:absolute;left:{{field.left}};top:{{field.top}};"> 
+
+    <svg class="stretchRight" ng-show="main.seg15" id="palmseg10" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 114.28 112.49"><title>palmsegr5</title><path d="M325,8.74A8.5,8.5,0,0,0,320.8-7.74a160.18,160.18,0,0,0-103.7,83.62,80.08,80.08,0,0,1,1.16,28.6c4.42-6.83,8.92-13.67,13.66-20.3A143.15,143.15,0,0,1,325,8.74Z" transform="translate(-217.11 8)"/></svg>
+
+    <svg class="stretchRight" ng-show="main.seg14" id="palmseg9" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 162.8 86.57"><title>palmsegr3</title><path d="M219,106c12.44-8.29,24.88-13.84,36.75-21.77A143,143,0,0,1,371.64,37.75a8.5,8.5,0,1,0,1.22-17A160,160,0,0,0,228.63,91.38q1.55-3.65,3.3-7.19c-4.73,6.63-9.23,13.47-13.66,20.3-0.1.82-.2,1.65-0.32,2.47A4.88,4.88,0,0,1,219,106Z" transform="translate(-217.95 -20.39)"/></svg>
+
+    <svg class="stretchRight" ng-show="main.seg13" id="palmseg8" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205.23 59.12"><title>palmsegr3</title><path d="M291.5,96c8.8-4,17.85-7.85,27.07-11.24A142.83,142.83,0,0,1,457.66,74.25a8.5,8.5,0,0,0,7.16-15.42A159.88,159.88,0,0,0,301.93,75.69c0.43-.49.88-1,1.32-1.45C291.38,82.16,278.94,87.71,266.5,96a4.88,4.88,0,0,0-1,1q-0.4,2.71-.95,5.42a1.15,1.15,0,0,0,1,.62l0.27,0C268.09,97.29,282.95,99.8,291.5,96Z" transform="translate(-264.51 -43.91)"/></svg>
+
+    <svg class="stretchRight" ng-show="main.seg12" id="palmseg7"  data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 216.81 54.55"><title>palmsegr2</title><path d="M326.62,110.55a143,143,0,0,1,130.87,30.66,8.5,8.5,0,1,0,11.2-12.78A159.82,159.82,0,0,0,302.06,101q3-2.19,6-4.23C298.85,100.16,289.8,104,281,108c-9,4-25,1-26,8-0.56,2.61,0,4.29,1.26,5.28C276.59,109.32,302.87,109.63,326.62,110.55Z" transform="translate(-254.78 -88.77)"/></svg>
+
+    <svg class="stretchRight" ng-show="main.seg11" id="palmseg6" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.32 84.83"><title>palmsegr1</title><path d="M255.39,140.29a2.41,2.41,0,0,1-.32,1.06c12.84-.62,25.61-1,37.52,1.74l0.36-.21a111.91,111.91,0,0,1,105.19,65.61,8.5,8.5,0,0,0,15.48-7,129.11,129.11,0,0,0-87.79-72.21l0.78-.2C302.54,128.11,275.84,127.8,255.39,140.29Z" transform="translate(-255.07 -128.65)"/></svg>
+
+    <svg class="stretchLeft" ng-show="main.seg10" id="palmseg5" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 118.43 123.4"><title>palmseg5</title><path d="M203.11,53.39c-0.37.74-.75,1.48-1.11,2.22A160.19,160.19,0,0,0,97.2-30.24a8.5,8.5,0,0,0-10.33,6.16A8.5,8.5,0,0,0,93-13.76,143.15,143.15,0,0,1,188.72,67.4a116.58,116.58,0,0,1,10.17,22.46,16.47,16.47,0,0,1,3.47,3C205.43,79.37,206.1,65.89,203.11,53.39Z" transform="translate(-86.61 30.5)"/></svg>
+
+    <svg class="stretchLeft" ng-show="main.seg9" id="palmseg4" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 161.64 91.97"><title>palmseg4</title><path d="M175.87,83.87A160,160,0,0,0,31.64,13.3a8.5,8.5,0,0,0,1.22,17A142.88,142.88,0,0,1,142.42,70.19a15.44,15.44,0,0,1,3.67,3.69c1.35,1.41,2.69,2.84,4,4.31l-0.37-.27C159.36,88.23,168,98.4,182.5,103.5a10.06,10.06,0,0,1,2.89,1.36A116.58,116.58,0,0,0,175.22,82.4C175.44,82.89,175.66,83.38,175.87,83.87Z" transform="translate(-23.75 -12.89)"/></svg>
+
+    <svg class="stretchLeft" ng-show="main.seg8" id="palmseg3" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 208.64 68.23"><title>palmseg3</title><path d="M-27.32,60.83a8.5,8.5,0,0,0-4.13,11.29,8.5,8.5,0,0,0,11.29,4.13A141.63,141.63,0,0,1,69.71,66.09,141.79,141.79,0,0,1,122.19,89c8.77,3.38,17.93,5.4,25.81,10h-2c9.07,3.63,23.91,6.44,28.82,15.14A5.57,5.57,0,0,0,176,113c2-3-4-9-8-10-14.46-5.1-23.14-15.27-32.79-25.58a158.62,158.62,0,0,0-62-28A158.49,158.49,0,0,0-27.32,60.83Z" transform="translate(32.24 -45.91)"/></svg>
+
+    <svg class="stretchLeft" ng-show="main.seg7"id="palmseg2" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220.58 54.54"><title>palmseg2</title><path d="M143,104h2c-7.88-4.59-17-6.61-25.81-10,0.92,0.65,1.84,1.31,2.75,2A158.41,158.41,0,0,0,48.63,84.24a158.49,158.49,0,0,0-93.32,39.19,8.5,8.5,0,0,0-.79,12,8.48,8.48,0,0,0,6.39,2.9,8.47,8.47,0,0,0,5.6-2.11,141.62,141.62,0,0,1,83.38-35,142.25,142.25,0,0,1,48.26,4.57c-0.62.15-1.23,0.31-1.84,0.47C101.22,106,106.11,105,111,105c-0.64-.64-0.05-1.69-0.07-2.36A8,8,0,0,1,110,102c0.72,0,.92.26,0.93,0.64,4.91,2.91,11.37-.4,16.07,3.36h-2c8.76,0,18.45,1.91,25.41,7.54l0.77,0.23c6.82-.63,14,0,17.88,6.46,1.32,0.57,2.63,1.16,3.94,1.77C170,111,153,108,143,104Z" transform="translate(47.58 -83.77)"/></svg>
+
+    <svg class="stretchLeft" ng-show="main.seg6"id="palmseg1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160.38 87.34"><title>palmseg1</title><path d="M174,136c-3.71-8.35-11.72-9-19.24-8.2L155,128h-2l1.76-.2c-7-5.84-16.86-7.8-25.76-7.8h2c-4.7-3.76-11.16-.46-16.07-3.36,0,0.67-.57,1.72.07,2.36-4.89,0-9.78,1-14.67,1.22A129,129,0,0,0,14.38,192a8.5,8.5,0,1,0,15.48,7,111.92,111.92,0,0,1,105.19-65.61l1.52,0.88A210.52,210.52,0,0,1,174,136Z" transform="translate(-13.62 -116.64)"/></svg>
+
+    <svg class="pullUp" ng-show="main.seg5"id="segmentpalm5" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77 45.71"><title>palmtreesegment1</title><path d="M303.9,282.12a8.48,8.48,0,0,0-4.82,8.77l4.41,34.52c5.74,0,11.45,0,17.16.2l-3.49-27.3h40.69l-3.65,28.58c5.7,0.19,11.4.32,17.1,0.32l4.64-36.32a8.48,8.48,0,0,0-4.82-8.77l0.08-.62H303.82Z" transform="translate(-299.01 -281.5)"/></svg>
+
+    <svg class="pullUp" ng-show="main.seg4"id="segmentpalm4" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77 45.71"><title>palmtreesegment1</title><path d="M303.9,282.12a8.48,8.48,0,0,0-4.82,8.77l4.41,34.52c5.74,0,11.45,0,17.16.2l-3.49-27.3h40.69l-3.65,28.58c5.7,0.19,11.4.32,17.1,0.32l4.64-36.32a8.48,8.48,0,0,0-4.82-8.77l0.08-.62H303.82Z" transform="translate(-299.01 -281.5)"/></svg>
+
+    <svg class="pullUp" ng-show="main.seg3" id="segmentpalm3" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77 45.71"><title>palmtreesegment1</title><path d="M303.9,282.12a8.48,8.48,0,0,0-4.82,8.77l4.41,34.52c5.74,0,11.45,0,17.16.2l-3.49-27.3h40.69l-3.65,28.58c5.7,0.19,11.4.32,17.1,0.32l4.64-36.32a8.48,8.48,0,0,0-4.82-8.77l0.08-.62H303.82Z" transform="translate(-299.01 -281.5)"/></svg>
+
+    <svg class="pullUp" ng-show="main.seg2" id="segmentpalm2" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77 45.71"><title>palmtreesegment1</title><path d="M303.9,282.12a8.48,8.48,0,0,0-4.82,8.77l4.41,34.52c5.74,0,11.45,0,17.16.2l-3.49-27.3h40.69l-3.65,28.58c5.7,0.19,11.4.32,17.1,0.32l4.64-36.32a8.48,8.48,0,0,0-4.82-8.77l0.08-.62H303.82Z" transform="translate(-299.01 -281.5)"/></svg>
+
+    <svg class="pullUp" ng-show="main.seg1" id="segmentpalm1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77 45.71"><title>palmtreesegment1</title><path d="M303.9,282.12a8.48,8.48,0,0,0-4.82,8.77l4.41,34.52c5.74,0,11.45,0,17.16.2l-3.49-27.3h40.69l-3.65,28.58c5.7,0.19,11.4.32,17.1,0.32l4.64-36.32a8.48,8.48,0,0,0-4.82-8.77l0.08-.62H303.82Z" transform="translate(-299.01 -281.5)"/></svg>
+
+    <svg id="plantpot" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 153.44 133.11"><title>plant-pot</title><path d="M369.58,342.31H336.43l-0.28-2.2c-5.7-.16-11.42-0.25-17.16-0.2l0.31,2.4H284.79a8.5,8.5,0,0,0-8.5,8.5v33a8.5,8.5,0,0,0,8.5,8.5h4.81l8.3,73.18a8.5,8.5,0,0,0,8.45,7.54h93.33a8.5,8.5,0,0,0,8.45-7.54l8.3-73.18h4.8a8.5,8.5,0,0,0,8.5-8.5v-33a8.5,8.5,0,0,0-8.5-8.5H386.72l0.08-.6c-5.71,0-11.4-.13-17.1-0.32ZM392.08,456H313.93l-7.23-63.73h92.61Zm20.64-96.7v16H293.28v-16H412.72Z" transform="translate(-276.29 -339.89)"/></svg>
+
+    </buildpalm>
+    <span ng-draggable name="wateringcan" callback-fn="growplant()" id="wateringcan" class="shape wateringcan"></span>
+  </div>
+
+  <!--     <div class="shape wateringcan" callback-fn="growplant()" ng-draggable='dragOptions'></div> -->
+
+  </div>
+
+  <br>Hello {{main.username}} !</br> These are your plants!
+  <br> Your in London, UK, the weather is, {{main.currentweatherstate}} the tempreture is
+  {{main.currentweathertemp| number:0}}  °C</br>
+  <strong>Its been  <time am-time-ago="main.lastwatered"></time> since you last watered your plant!  </strong>
+
+  <button ng-click="main.moveTree()">Move Tree</button>
+
+
+      </div>
