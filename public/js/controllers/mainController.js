@@ -5,8 +5,8 @@ MainController.$inject = ['$auth', 'tokenService', '$resource', '$window', '$sta
 function MainController($auth, tokenService, $resource, $window, $state, GEOCODER_API_KEY, $http, GUARDIAN_API_KEY, $window,$scope,$document) {
   var self = this;
 
-/*  self.palmHealth = 0;
-  self.daisyHealth = 0;*/
+ self.palmHealth = 0;
+  self.daisyHealth = 0;
   self.currentweatherstate = "";
   self.currentweathercode = 0;
   self.currentweathertemp = 0;
@@ -14,12 +14,7 @@ function MainController($auth, tokenService, $resource, $window, $state, GEOCODE
   self.lastWeatherState = "" 
   self.timesPalmWateredDuringCurrentSession = 0;
 
-  self.palmX = 0;
-  self.palmY = 0;
-
-  $scope.field = {};
-/*  $scope.field.left = 0;
-  $scope.field.top = 0;*/
+  $scope.itemLocations = {palmX: 63, palmY: -267, daisyX: 103, daisyY: -267, weatherX: 560,weatherY: 129, wateringcanX: 300, wateringcanY: -67}
 
 
   var socket = $window.io();
@@ -44,16 +39,16 @@ function MainController($auth, tokenService, $resource, $window, $state, GEOCODE
 
   self.retrieveActivity = function(message){
     console.log(message);
-    self.history.push({ text: message.text, username: message.username,lastwatered: message.lastwatered, palmHealth: message.palmHealth, palmX: message.palmX, palmY: message.palmY, lastWeatherState: message.lastWeatherState});
+    self.history.push({ text: message.text, username: message.email,lastwatered: message.lastwatered, palmHealth: message.palmHealth, daisyHealth: message.daisyHealth, palmX: message.palmX, palmY: message.palmY, daisyX: message.daisyX,daisyY: message.daisyY, lastWeatherState: message.lastWeatherState});
 
     self.lastHistory = _.last(self.history);
 
     self.lastwatered = self.lastHistory.lastwatered;
     self.palmHealth = self.lastHistory.palmHealth; 
-    self.palmX = self.lastHistory.palmX;
-    self.palmY = self.lastHistory.palmY;
+    self.daisyHealth = self.lastHistory.daisyHealth;
+/*    $scope.itemLocations = {palmX: self.lastHistory.palmX, palmY: self.lastHistory.palmY, daisyX: self.lastHistory.daisyX, daisyY: self.lastHistory.daisyY,weatherX: 662,weatherY: 129, wateringcanX: 337, wateringcanY: 259 }*/
 
-    self.moveTree();
+
     self.plantGrowthLogic()
   }
 
@@ -142,32 +137,28 @@ var lastSunny = _.findLastIndex(self.history, function(o) { return o.lastWeather
   }
 
   self.sendMessage = function() {
-    socket.emit('message', { text: self.message, username: self.username, lastwatered: self.lastwatered, palmHealth: self.palmHealth, palmX: self.palmX, palmY: self.palmY, lastWeatherState: self.lastWeatherState, history: self.history});
+    socket.emit('message', { text: self.message, username: self.username, lastwatered: self.lastwatered, palmHealth: self.palmHealth, daisyHealth: self.daisyHealth, palmX: $scope.itemLocations.palmX, palmY: $scope.itemLocations.palmY,daisyX: $scope.itemLocations.daisyX,daisyY: $scope.itemLocations.daisyY, lastWeatherState: self.lastWeatherState, history: self.history});
    // self.messages.push({ text: self.message, username: 'someuser' });
     self.message = null;
   }
 
-  $scope.storePalmLocation = function(){
-    if (self.palmHealth < 0){ self.palmHealth = 0}
-    if (self.palmHealth > 15){ self.palmHealth = 15}
-/*    console.log("awesome storing palm location" + $window.palmX + "x axis" + $window.palmY + "y axis")*/
-    self.palmX = $window.palmX;
-    self.palmY = $window.palmY;
+  $scope.storeDraggableItemsLocations = function(){
+    $scope.itemLocations.palmX = $window.palmX;
+    $scope.itemLocations.palmY = $window.palmY;
+    $scope.itemLocations.daisyX = $window.daisyX;
+    $scope.itemLocations.daisyY = $window.daisyY;
     self.message = "updatePlant";
     self.sendMessage();
   }
 
 
-  self.moveTree = function(){
-    var left = self.palmX + "px";
-    var top = self.palmY + "px";
-    $scope.field = {top:top, left};
-  }
 
 
   self.updatePlant = function(){
     if (self.palmHealth < 0){ self.palmHealth = 0}
     if (self.palmHealth > 15){ self.palmHealth = 15}
+    if (self.daisyHealth < 0){ self.daisyHealth = 0}
+    if (self.daisyHealth > 15){ self.daisyHealth = 15}
       // Time
       var n = _.now()
       self.lastwatered = n;
@@ -250,6 +241,7 @@ var lastSunny = _.findLastIndex(self.history, function(o) { return o.lastWeather
       self.palmHealth++
     } else if ($window.currentlyBeingWatered == "daisy"){
       console.log("attempting to grow daisy")
+      self.daisyHealth++
     } 
     $scope.$apply();
     self.updatePlant();

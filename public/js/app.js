@@ -122,6 +122,9 @@ angular
           daisyX = x;
           daisyY = y;
           console.log("currently dragged item was daisy, and values " + daisyX + daisyY + "have been stored")
+          $window.daisyX = daisyX;
+          $window.daisyY = daisyY;
+          scope.someCtrlFn();
         }
 
         if (currentlyDraggedItem == "palm"){
