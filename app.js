@@ -63,8 +63,8 @@ dblogin = function(email){
   });
 }
 
-dbupdatePlant = function(email,plantHealth,lastwatered,palmX,palmY,text){
-  Plant.findOneAndUpdate({email: email}, {$set:{plantHealth:plantHealth, lastwatered: lastwatered, palmX: palmX, palmY: palmY}}, {new: true}, function(err, plant){
+dbupdatePlant = function(email,palmHealth,lastwatered,palmX,palmY,lastWeatherState, history){
+  Plant.findOneAndUpdate({email: email}, {$set:{palmHealth:palmHealth, lastwatered: lastwatered, palmX: palmX, palmY: palmY, lastWeatherState: lastWeatherState, history}}, {new: true}, function(err, plant){
       if(err){
           return console.log(err);
       }
@@ -80,7 +80,7 @@ io.on('connect', function(socket) {
     if (message.text == "login"){
       dblogin(message.username)
     } else if (message.text == "updatePlant"){
-     dbupdatePlant(message.username,message.plantHealth,message.lastwatered,message.palmX,message.palmY)
+     dbupdatePlant(message.username,message.palmHealth,message.lastwatered,message.palmX,message.palmY,message.lastWeatherState, message.history)
     } else {
       io.emit('message', message);
     }

@@ -20,6 +20,13 @@ angular
       palmX = rect.left;
       palmY = rect.top;
 
+      daisy = document.getElementById("daisy");
+      var rect = daisy.getBoundingClientRect();
+      console.log(rect.top, rect.left);
+
+      daisyX = rect.left;
+      daisyY = rect.top;
+
       wateringcan = document.getElementById("wateringcan");
       var rect = palmtree.getBoundingClientRect();
       console.log(rect.top, rect.left);
@@ -55,12 +62,28 @@ angular
         y = event.pageY - startY;
         x = event.pageX - startX;
 
-        if (currentlyDraggedItem == "wateringcan"){
+      if (currentlyDraggedItem == "wateringcan"){
           wateringcanX = x;
           wateringcanY = y;
+       
 
-          if (wateringcanX < (palmX + 55) && wateringcanX > palmX){
+        if (wateringcanX < (palmX + 55) && wateringcanX > palmX){
             console.log("wateringcan touching palm")
+            $window.currentlyBeingWatered = "palm";
+            var degrees = -45;
+
+                   element.css('transition', '-webkit-transform 800ms ease');
+
+                   var rotate = function() {
+                      element.css('-webkit-transform', 'rotate(' + degrees + 'deg)');
+                      degrees += 360;
+                   };
+
+                    rotate();
+                    scope.someCtrlFn();
+          } else if (wateringcanX < (daisyX + 100) && wateringcanX > daisyX){
+            console.log("wateringcan touching daisy")
+            $window.currentlyBeingWatered = "daisy";
             var degrees = -45;
 
                    element.css('transition', '-webkit-transform 800ms ease');
@@ -94,6 +117,12 @@ angular
 
       function mouseup() {
         console.log(currentlyDraggedItem + "has been left at " + x + "x axis and " + y + "y axis" )
+
+        if (currentlyDraggedItem == "daisy"){
+          daisyX = x;
+          daisyY = y;
+          console.log("currently dragged item was daisy, and values " + daisyX + daisyY + "have been stored")
+        }
 
         if (currentlyDraggedItem == "palm"){
           palmX = x;

@@ -63,12 +63,12 @@
 
 </div>
 
+
 <br>Hello {{main.username}} !</br> These are your plants!
 <br> Your in London, UK, the weather is, {{main.currentweatherstate}} the tempreture is
 {{main.currentweathertemp| number:0}}  °C</br>
 <strong>Its been  <time am-time-ago="main.lastwatered"></time> since you last watered your plant!  </strong>
 
-<!-- <button ng-click="main.moveTree()">Move Tree</button> -->
 <div class="container">
   <div class="sunny" ng-show="sunny"></div> 
  <div class="cloudy" ng-show="cloudy"></div>

@@ -52,6 +52,137 @@
 }
 
 
+daisy{
+  position: absolute;
+   cursor: pointer;
+    top: 959px;
+    left: 353px;
+}
+#turf{
+  position: absolute;
+  width: px;
+  height: 17px;
+  left: -20px;
+  margin-top: 9px;
+}
+#daisyseg1{
+  position: absolute;
+  width: 3px;
+  height: 20px;
+  left: 1px;
+  margin-top: -1px;
+  fill: green;
+}
+#daisyseg2{
+ position: absolute;
+     left: 6px;
+     width: 3px;
+     height: 20px;
+     margin-top: -1px;
+     fill: green;
+}
+#daisyseg3{
+  position: absolute;
+      left: 12px;
+      width: 3px;
+      margin-top: 7px;
+      fill: green;
+}
+#daisyseg4{
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: -13px;
+  left:-13px;
+  fill: green;
+}
+#daisyseg5{
+  position: absolute;
+      width: 20px;
+      height: 20px;
+      top: -13px;
+      left: -5px;
+      fill: green;
+}
+#daisyseg6{
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: -13px;
+  left: 4px;
+  fill: green;
+}
+#daisyseg7{
+  position: absolute;
+      width: 20px;
+      height: 20px;
+      top: -13px;
+      left: -22px;
+      fill: green;
+}
+#daisyseg8{
+ position: absolute;
+ width: 15px;
+ height: 17px;
+ top: -13px;
+ left: 13px;
+ fill: green;
+}
+#daisyseg9{
+  position: absolute;
+      width: 6px;
+      top: -22px;
+      left: -2px;
+      fill: green;
+}
+#daisyseg10{
+  position: absolute;
+  width: 3px;
+  height: px;
+  top: -21px;
+  left: 12px;
+  fill: green;
+}
+#daisyseg11{
+  position: absolute;
+      width: 20px;
+      height: 20px;
+      margin-top: -30px;
+      left: -25px;
+      fill: pink;
+}
+#daisyseg12{
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin-top: -40px;
+  left: -12px;
+  fill: white;
+}
+#daisyseg13{
+  position: absolute;
+     width: 20px;
+     height: 20px;
+     margin-top: -32px;
+     left: 1px;
+     fill: pink;
+
+}
+#daisyseg14{
+  position: absolute;
+      width: 20px;
+      height: 20px;
+      fill: white;
+      margin-top: -40px;
+      left: -30px;
+}
+#daisyseg15{
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin-top: -47px;
+  fill: pink;
+}
 
 buildpalm {
   display: inline-block;

@@ -2,11 +2,13 @@ var mongoose = require('mongoose');
 
 var plantSchema = mongoose.Schema({
   email: String,
-  plantHealth: Number,
-  lastwatered: String,
+  palmHealth: Number,
+  lastwatered: Number,
   palmX: Number,
   palmY: Number,
-  text: String
+  text: String,
+  lastWeatherState: String,
+  history: []
 });
 
 module.exports = mongoose.model("plant", plantSchema);
