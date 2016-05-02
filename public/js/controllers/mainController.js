@@ -36,7 +36,7 @@ function MainController($auth, tokenService, $resource, $window, $state, GEOCODE
   self.viewHistory = function(){
     console.log(self.history);
   }
-
+/*test test test*/
   self.retrieveActivity = function(message){
     console.log(message);
     self.history.push({ text: message.text, username: message.email,lastwatered: message.lastwatered, palmHealth: message.palmHealth, daisyHealth: message.daisyHealth, palmX: message.palmX, palmY: message.palmY, daisyX: message.daisyX,daisyY: message.daisyY, lastWeatherState: message.lastWeatherState});
