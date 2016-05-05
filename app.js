@@ -63,8 +63,8 @@ dblogin = function(email){
   });
 }
 
-dbupdatePlant = function(email,palmHealth,daisyHealth,lastwatered,palmX,palmY,daisyX,daisyY,lastWeatherState, history){
-  Plant.findOneAndUpdate({email: email}, {$set:{palmHealth:palmHealth,daisyHealth: daisyHealth, lastwatered: lastwatered, palmX: palmX, palmY: palmY,daisyX: daisyX, daisyY: daisyY, lastWeatherState: lastWeatherState,history: history}}, {new: true}, function(err, plant){
+dbupdatePlant = function(email,palmHealth,daisyHealth,lastWateredPalm,palmX,palmY,daisyX,daisyY,lastWeatherState, history){
+  Plant.findOneAndUpdate({email: email}, {$set:{palmHealth:palmHealth,daisyHealth: daisyHealth, lastWateredPalm: lastWateredPalm, palmX: palmX, palmY: palmY,daisyX: daisyX, daisyY: daisyY, lastWeatherState: lastWeatherState,history: history}}, {new: true}, function(err, plant){
       if(err){
           return console.log(err);
       }
@@ -80,7 +80,7 @@ io.on('connect', function(socket) {
     if (message.text == "login"){
       dblogin(message.username)
     } else if (message.text == "updatePlant"){
-     dbupdatePlant(message.username,message.palmHealth,message.daisyHealth,message.lastwatered,message.palmX,message.palmY,message.daisyX,message.daisyY,message.lastWeatherState, message.history)
+     dbupdatePlant(message.username,message.palmHealth,message.daisyHealth,message.lastWateredPalm,message.palmX,message.palmY,message.daisyX,message.daisyY,message.lastWeatherState, message.history)
     } else {
       io.emit('message', message);
     }

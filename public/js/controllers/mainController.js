@@ -11,7 +11,6 @@ function MainController($auth, tokenService, $resource, $window, $state, GEOCODE
   self.currentweatherstate = "";
   self.currentweathercode = 0;
   self.currentweathertemp = 0;
-  self.lastwatered = "never before";
   self.lastWeatherState = "" 
   self.timesPalmWateredDuringCurrentSession = 0;
 
@@ -34,17 +33,41 @@ function MainController($auth, tokenService, $resource, $window, $state, GEOCODE
     self.message = null;
   }
 
-  self.viewHistory = function(){
+self.viewHistory = function(){
     console.log(self.history);
+    plantHISTORY = self.history;
+  var eightdaysAgo = parseInt(moment().subtract(8, 'days').format('x'));
+
+  arrayoflasteightdaysHistory = [];
+  var i = 0
+  while (i < plantHISTORY.length){
+    if (plantHISTORY[i].lastWateredPalm > eightdaysAgo){
+      arrayoflasteightdaysHistory.push(plantHISTORY[i]);
+    }
+    i++
   }
+  daysbetween = []
+  var i = 0
+  while (i < arrayoflasteightdaysHistory.length){
+   var a = moment(arrayoflasteightdaysHistory[i].lastWateredPalm);
+    var b = moment();
+    var timeBetween = a.diff(b, 'days')
+    daysbetween.push(timeBetween)
+  i++
+  } 
+  var howmanyDaysWateredoutofEight = _.intersection(daysbetween, [0,1,2,3,4,5,6,7]);
+  if (howmanyDaysWateredoutofEight.length > 7){
+    console.log("plant has been watered everyday during last 8 days");
+  }
+}
 /*test test test*/
   self.retrieveActivity = function(message){
     console.log(message);
-    self.history.push({ text: message.text, username: message.email,lastwatered: message.lastwatered, palmHealth: message.palmHealth, daisyHealth: message.daisyHealth, palmX: message.palmX, palmY: message.palmY, daisyX: message.daisyX,daisyY: message.daisyY, lastWeatherState: message.lastWeatherState});
+    self.history.push({ text: message.text, username: message.email,lastWateredPalm: message.lastWateredPalm, palmHealth: message.palmHealth, daisyHealth: message.daisyHealth, palmX: message.palmX, palmY: message.palmY, daisyX: message.daisyX,daisyY: message.daisyY, lastWeatherState: message.lastWeatherState});
 
     self.lastHistory = _.last(self.history);
 
-    self.lastwatered = self.lastHistory.lastwatered;
+    self.lastWateredPalm = self.lastHistory.lastWateredPalm;
     self.palmHealth = self.lastHistory.palmHealth; 
     self.daisyHealth = self.lastHistory.daisyHealth;
 /*    $scope.itemLocations = {palmX: self.lastHistory.palmX, palmY: self.lastHistory.palmY, daisyX: self.lastHistory.daisyX, daisyY: self.lastHistory.daisyY,weatherX: 662,weatherY: 129, wateringcanX: 337, wateringcanY: 259 }*/
@@ -79,7 +102,7 @@ var lastCloudy = _.findLastIndex(self.history, function(o) { return o.lastWeathe
 if (lastCloudy == -1){
   console.log("its never been recorded cloudy before");
 } else {
-  var timeLastCloudy = self.history[lastCloudy].lastwatered
+  var timeLastCloudy = self.history[lastCloudy].lastWateredPalm
   var minutesSinceCloudy = (currentTime - timeLastCloudy) / 1000;
   minutesSinceCloudy = minutesSinceCloudy / 60;
   minutesSinceCloudy = Math.round(minutesSinceCloudy);
@@ -91,7 +114,7 @@ var lastSunny = _.findLastIndex(self.history, function(o) { return o.lastWeather
   if (lastSunny == -1){
     console.log("its never been recorded sunny before");
   } else {
-    var timeLastSunny = self.history[lastSunny].lastwatered
+    var timeLastSunny = self.history[lastSunny].lastWateredPalm
     var minutesSinceSunny = (currentTime - timeLastSunny) / 1000;
     minutesSinceSunny = minutesSinceSunny / 60;
     minutesSinceSunny = Math.round(minutesSinceSunny);
@@ -103,24 +126,24 @@ var lastSunny = _.findLastIndex(self.history, function(o) { return o.lastWeather
     if (lastRainy == -1){
       console.log("its never been recorded rainy before");
     } else {
-      var timeLastRainy = self.history[lastRainy].lastwatered
+      var timeLastRainy = self.history[lastRainy].lastWateredPalm
       var minutesSinceRainy = (currentTime - timeLastRainy) / 1000;
       minutesSinceRainy = minutesSinceRainy / 60;
       minutesSinceRainy = Math.round(minutesSinceRainy);
     }
 
 
-     if (self.lastwatered == undefined){
+     if (self.lastWateredPalm == undefined){
         // Time
         var n = _.now()
-        self.lastwatered = n;
+        self.lastWateredPalm = n;
      } else {
-       self.lastwatered = self.lastwatered;
+       self.lastWateredPalm = self.lastWateredPalm;
      }
 
 /*
 
-    var minutesSinceLastWatered = ((currentTime - self.lastwatered) / 60) / 1000;
+    var minutesSinceLastWatered = ((currentTime - self.lastWateredPalm) / 60) / 1000;
     minutesSinceLastWatered = Math.round(minutesSinceLastWatered);
 
     self.palmHealth = self.palmHealth - minutesSinceLastWatered;
@@ -138,7 +161,7 @@ var lastSunny = _.findLastIndex(self.history, function(o) { return o.lastWeather
   }
 
   self.sendMessage = function() {
-    socket.emit('message', { text: self.message, username: self.username, lastwatered: self.lastwatered, palmHealth: self.palmHealth, daisyHealth: self.daisyHealth, palmX: $scope.itemLocations.palmX, palmY: $scope.itemLocations.palmY,daisyX: $scope.itemLocations.daisyX,daisyY: $scope.itemLocations.daisyY, lastWeatherState: self.lastWeatherState, history: self.history});
+    socket.emit('message', { text: self.message, username: self.username, lastWateredPalm: self.lastWateredPalm, palmHealth: self.palmHealth, daisyHealth: self.daisyHealth, palmX: $scope.itemLocations.palmX, palmY: $scope.itemLocations.palmY,daisyX: $scope.itemLocations.daisyX,daisyY: $scope.itemLocations.daisyY, lastWeatherState: self.lastWeatherState, history: self.history});
    // self.messages.push({ text: self.message, username: 'someuser' });
     self.message = null;
   }
@@ -162,7 +185,7 @@ var lastSunny = _.findLastIndex(self.history, function(o) { return o.lastWeather
     if (self.daisyHealth > 15){ self.daisyHealth = 15}
       // Time
       var n = _.now()
-      self.lastwatered = n;
+      self.lastWateredPalm = n;
       self.message = "updatePlant";
       self.sendMessage();
       self.message = null;
@@ -283,7 +306,10 @@ var sunriseSunset = function (astro){
   console.log("its not late enough to set the sun, yet!" + timeleft + "hours to go! ")
  }
 
+}
 
+self.analyzeHistory = function(){
+  self.history
 }
 
 

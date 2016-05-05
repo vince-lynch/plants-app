@@ -4,7 +4,7 @@ var plantSchema = mongoose.Schema({
   email: String,
   palmHealth: Number,
   daisyHealth: Number,
-  lastwatered: Number,
+  lastWateredPalm: Number,
   palmX: Number,
   palmY: Number,
   daisyX: Number,
