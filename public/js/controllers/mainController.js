@@ -5,6 +5,7 @@ MainController.$inject = ['$auth', 'tokenService', '$resource', '$window', '$sta
 function MainController($auth, tokenService, $resource, $window, $state, GEOCODER_API_KEY, $http, GUARDIAN_API_KEY, $window,$scope,$document) {
   var self = this;
 
+  $scope.weatherBGColor = "#85DB8C";
  self.palmHealth = 0;
   self.daisyHealth = 0;
   self.currentweatherstate = "";
@@ -189,21 +190,27 @@ var lastSunny = _.findLastIndex(self.history, function(o) { return o.lastWeather
       console.log("stormy if condition met");
       $scope.stormy = true;
       self.lastWeatherState = "stormy";
+      $scope.weatherBGColor = "#444444";
     } else if (currentweathercode == 5 ||currentweathercode == 6 ||currentweathercode == 7 ||currentweathercode == 8 ||currentweathercode == 10 ||currentweathercode == 13 ||currentweathercode == 14 ||currentweathercode == 15 ||currentweathercode == 16 ||currentweathercode == 17 ||currentweathercode == 18 ||currentweathercode == 46 ||currentweathercode == 41 ||currentweathercode == 42 ||currentweathercode == 43 ||currentweathercode == 35){
       $scope.snowy = true;
       self.lastWeatherState = "snowy";
+     $scope.weatherBGColor = "#85DB8C";
     } else if (currentweathercode == 11 ||currentweathercode == 12 ||currentweathercode == 40 || currentweathercode ==  39 || currentweathercode ==  38){
       $scope.rainy = true;
       self.lastWeatherState = "rainy";
+      $scope.weatherBGColor = "#E6E6E6";
     } else if(currentweathercode == 19 || currentweathercode == 20 || currentweathercode == 22 || currentweathercode == 23 || currentweathercode == 24 || currentweathercode == 26 || currentweathercode == 29){
       $scope.cloudy = true;
       self.lastWeatherState = "cloudy";
+      $scope.weatherBGColor = "#2EB5E5";
     } else if(currentweathercode == 27 ||currentweathercode == 29 ||currentweathercode == 31 ||currentweathercode == 33){
       $scope.starry = true;
       self.lastWeatherState = "starry";
+      $scope.weatherBGColor = "#222233";
     } else if(currentweathercode == 32 ||currentweathercode == 34 ||currentweathercode == 36 || currentweathercode == 28 ||currentweathercode == 30){
       $scope.sunny = true;
       self.lastWeatherState = "sunny";
+     $scope.weatherBGColor = "#00BBFF";
     }
   }
 
@@ -215,6 +222,8 @@ var lastSunny = _.findLastIndex(self.history, function(o) { return o.lastWeather
     }).then(function successCallback(response) {
         console.log(response);
         console.log("The temperatute in London is " + response.data.query.results.channel.item.condition.temp + response.data.query.results.channel.item.condition.text);
+
+        $scope.yahooWeatherResponse = response;
 
         self.currentweatherstate = response.data.query.results.channel.item.condition.text;
 
@@ -234,6 +243,48 @@ var lastSunny = _.findLastIndex(self.history, function(o) { return o.lastWeather
 
   self.getWeather();
 
+self.yahooObject = function(){
+  console.log($scope.yahooWeatherResponse);
+var Sunrise =  $scope.yahooWeatherResponse.data.query.results.channel.astronomy.sunrise
+var Sunset = "8:22 pm"//$scope.yahooWeatherResponse.data.query.results.channel.astronomy.sunset
+var sunriseSunset = function (astro){
+// Sunrise/Sunset Calculation
+  var hours = parseInt(astro.split(":")[0]);
+  var minutes = parseInt(astro.split(/:| /)[1]);
+  var amOrPM = (astro.split(/:| /)[2]);
+
+
+  if (amOrPM = "pm"){
+    hours = hours + 12;
+  }
+
+  var a = moment({hour: hours, minute: minutes});
+  var b = moment();
+ return a.diff(b, 'hours'); // 1 
+ }
+ hoursSinceSunrise = sunriseSunset(Sunrise);
+ //hoursSinceSunset = sunriseSunset(Sunset);
+ console.log("Its been " + hoursSinceSunrise + " hours since sunrise");
+
+ // sunset calculation
+
+ var timenowinhours = moment().toObject().hours
+ var sunsetHours = parseInt(Sunset.split(":")[0]);
+ var minutes = parseInt(Sunset.split(/:| /)[1]);
+ var amOrPM = (Sunset.split(/:| /)[2]);
+ if (amOrPM = "pm"){
+   sunsetHours = sunsetHours + 12;
+ }
+
+ if (timenowinhours > sunsetHours){
+  //bgchangecolor ="star background"
+ } else {
+  var timeleft = sunsetHours - timenowinhours
+  console.log("its not late enough to set the sun, yet!" + timeleft + "hours to go! ")
+ }
+
+
+}
 
 
   self.growplant = function(){
