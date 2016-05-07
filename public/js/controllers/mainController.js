@@ -33,6 +33,28 @@ function MainController($auth, tokenService, $resource, $window, $state, GEOCODE
     self.message = null;
   }
 
+self.sevenDaysWeatherCheck = function(weather){
+  plantHISTORY = self.history;
+
+  var eightdaysAgo = $window.moment().subtract(8, 'days').toObject()
+
+  arrayoflasteightdaysHistory = [];
+  _(plantHISTORY).forEach(function(item) {
+
+    if ($window.moment(item.lastWateredPalm).isBetween(eightdaysAgo, $window.moment())){arrayoflasteightdaysHistory.push(item)};
+  });
+
+  var i = 0;
+  _(arrayoflasteightdaysHistory).forEach(function(item) {
+    if (item.lastWeatherState == weather){
+   i = i + 1
+   }
+  });
+  return i;
+}
+
+
+
 self.palmWateredDaysCheck = function(){
     console.log(self.history);
     plantHISTORY = self.history;
@@ -89,45 +111,19 @@ self.palmWateredDaysCheck = function(){
   });
 
   self.plantGrowthLogic = function(){
-  var n = _.now()
-  var currentTime = n;
-/*
-////// last cloudy
-var lastCloudy = _.findLastIndex(self.history, function(o) { return o.lastWeatherState == 'cloudy'; });
 
-if (lastCloudy == -1){
-  console.log("its never been recorded cloudy before");
-} else {
-  var timeLastCloudy = self.history[lastCloudy].lastWateredPalm
-  var minutesSinceCloudy = (currentTime - timeLastCloudy) / 1000;
-  minutesSinceCloudy = minutesSinceCloudy / 60;
-  minutesSinceCloudy = Math.round(minutesSinceCloudy);
+////// cloudy times in last week
+var howManyTimesCloudy = self.sevenDaysWeatherCheck("cloudy");
+console.log("It has been cloudy " + howManyTimesCloudy+ " times in the last 7 days")
 
-}
+////// sunny
+var howManyTimesSunny = self.sevenDaysWeatherCheck("sunny");
+console.log("It has been sunny " + howManyTimesSunny + " times in the last 7 days")
 
-////// last sunny
-var lastSunny = _.findLastIndex(self.history, function(o) { return o.lastWeatherState == 'sunny'; });
-  if (lastSunny == -1){
-    console.log("its never been recorded sunny before");
-  } else {
-    var timeLastSunny = self.history[lastSunny].lastWateredPalm
-    var minutesSinceSunny = (currentTime - timeLastSunny) / 1000;
-    minutesSinceSunny = minutesSinceSunny / 60;
-    minutesSinceSunny = Math.round(minutesSinceSunny);
+////// rainy
+var howManyTimesRainy = self.sevenDaysWeatherCheck("rainy");
+  console.log("It has been rainy " + howManyTimesRainy + " times in the last 7 days")
 
-  }
-
-  ////// last sunny
-  var lastRainy = _.findLastIndex(self.history, function(o) { return o.lastWeatherState == 'rainy'; });
-    if (lastRainy == -1){
-      console.log("its never been recorded rainy before");
-    } else {
-      var timeLastRainy = self.history[lastRainy].lastWateredPalm
-      var minutesSinceRainy = (currentTime - timeLastRainy) / 1000;
-      minutesSinceRainy = minutesSinceRainy / 60;
-      minutesSinceRainy = Math.round(minutesSinceRainy);
-    }
-*/
 
      if (self.lastWateredPalm == undefined){
         // Time
@@ -201,23 +197,23 @@ var lastSunny = _.findLastIndex(self.history, function(o) { return o.lastWeather
       $scope.stormy = true;
       self.lastWeatherState = "stormy";
       $scope.weatherBGColor = "#444444";
-    } else if (currentweathercode == 5 ||currentweathercode == 6 ||currentweathercode == 7 ||currentweathercode == 8 ||currentweathercode == 10 ||currentweathercode == 13 ||currentweathercode == 14 ||currentweathercode == 15 ||currentweathercode == 16 ||currentweathercode == 17 ||currentweathercode == 18 ||currentweathercode == 46 ||currentweathercode == 41 ||currentweathercode == 42 ||currentweathercode == 43 ||currentweathercode == 35){
+    } if (currentweathercode == 5 ||currentweathercode == 6 ||currentweathercode == 7 ||currentweathercode == 8 ||currentweathercode == 10 ||currentweathercode == 13 ||currentweathercode == 14 ||currentweathercode == 15 ||currentweathercode == 16 ||currentweathercode == 17 ||currentweathercode == 18 ||currentweathercode == 46 ||currentweathercode == 41 ||currentweathercode == 42 ||currentweathercode == 43 ||currentweathercode == 35){
       $scope.snowy = true;
       self.lastWeatherState = "snowy";
      $scope.weatherBGColor = "#85DB8C";
-    } else if (currentweathercode == 11 ||currentweathercode == 12 ||currentweathercode == 40 || currentweathercode ==  39 || currentweathercode ==  38){
+    } if (currentweathercode == 11 ||currentweathercode == 12 ||currentweathercode == 40 || currentweathercode ==  39 || currentweathercode ==  38){
       $scope.rainy = true;
       self.lastWeatherState = "rainy";
       $scope.weatherBGColor = "#E6E6E6";
-    } else if(currentweathercode == 19 || currentweathercode == 20 || currentweathercode == 22 || currentweathercode == 23 || currentweathercode == 24 || currentweathercode == 26 || currentweathercode == 29){
+    } if(currentweathercode == 19 || currentweathercode == 20 || currentweathercode == 22 || currentweathercode == 23 || currentweathercode == 24 || currentweathercode == 26 || currentweathercode == 29){
       $scope.cloudy = true;
       self.lastWeatherState = "cloudy";
       $scope.weatherBGColor = "#2EB5E5";
-    } else if(currentweathercode == 27 ||currentweathercode == 29 ||currentweathercode == 31 ||currentweathercode == 33){
+    } if(currentweathercode == 27 ||currentweathercode == 29 ||currentweathercode == 31 ||currentweathercode == 33){
       $scope.starry = true;
       self.lastWeatherState = "starry";
       $scope.weatherBGColor = "#222233";
-    } else if(currentweathercode == 32 ||currentweathercode == 34 ||currentweathercode == 36 || currentweathercode == 28 ||currentweathercode == 30){
+    } if(currentweathercode == 32 ||currentweathercode == 34 ||currentweathercode == 36 || currentweathercode == 28 ||currentweathercode == 30 || self.currentweathertemp > 15){
       $scope.sunny = true;
       self.lastWeatherState = "sunny";
      $scope.weatherBGColor = "#00BBFF";
