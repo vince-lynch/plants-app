@@ -33,33 +33,30 @@ function MainController($auth, tokenService, $resource, $window, $state, GEOCODE
     self.message = null;
   }
 
-self.viewHistory = function(){
+self.palmWateredDaysCheck = function(){
     console.log(self.history);
     plantHISTORY = self.history;
-  var eightdaysAgo = parseInt(moment().subtract(8, 'days').format('x'));
 
+  var eightdaysAgo = $window.moment().subtract(8, 'days').toObject()
   arrayoflasteightdaysHistory = [];
-  var i = 0
-  while (i < plantHISTORY.length){
-    if (plantHISTORY[i].lastWateredPalm > eightdaysAgo){
-      arrayoflasteightdaysHistory.push(plantHISTORY[i]);
-    }
-    i++
-  }
-  daysbetween = []
-  var i = 0
-  while (i < arrayoflasteightdaysHistory.length){
-   var a = moment(arrayoflasteightdaysHistory[i].lastWateredPalm);
-    var b = moment();
-    var timeBetween = a.diff(b, 'days')
-    daysbetween.push(timeBetween)
-  i++
-  } 
-  var howmanyDaysWateredoutofEight = _.intersection(daysbetween, [0,1,2,3,4,5,6,7]);
-  if (howmanyDaysWateredoutofEight.length > 7){
-    console.log("plant has been watered everyday during last 8 days");
+  _(plantHISTORY).forEach(function(item) {
+    
+    if ($window.moment(item.lastWateredPalm).isBetween(eightdaysAgo, $window.moment())){
+     var recentItem = $window.moment(item.lastWateredPalm).format("dddd");
+        arrayoflasteightdaysHistory.push(recentItem);
+      }
+  });
+ 
+  whichDaysWatered = _.intersection(arrayoflasteightdaysHistory, ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]);
+  if (whichDaysWatered.length > 6){
+    console.log("plant has been watered everyday during last 7 days");
+    return whichDaysWatered.length;
+
+  } else {console.log("plant has not been watered everyday")
+    return whichDaysWatered.length;
   }
 }
+
 /*test test test*/
   self.retrieveActivity = function(message){
     console.log(message);
@@ -85,6 +82,7 @@ self.viewHistory = function(){
       if (message.history != undefined){
         self.history = message.history;
       }
+      console.log(message);
       self.retrieveActivity(message);
       
     });
@@ -93,9 +91,7 @@ self.viewHistory = function(){
   self.plantGrowthLogic = function(){
   var n = _.now()
   var currentTime = n;
-
-  $window.appHistory = self.history;
-
+/*
 ////// last cloudy
 var lastCloudy = _.findLastIndex(self.history, function(o) { return o.lastWeatherState == 'cloudy'; });
 
@@ -131,27 +127,18 @@ var lastSunny = _.findLastIndex(self.history, function(o) { return o.lastWeather
       minutesSinceRainy = minutesSinceRainy / 60;
       minutesSinceRainy = Math.round(minutesSinceRainy);
     }
-
+*/
 
      if (self.lastWateredPalm == undefined){
         // Time
-        var n = _.now()
+        var n = $window.moment().toObject()
         self.lastWateredPalm = n;
      } else {
        self.lastWateredPalm = self.lastWateredPalm;
      }
 
-/*
-
-    var minutesSinceLastWatered = ((currentTime - self.lastWateredPalm) / 60) / 1000;
-    minutesSinceLastWatered = Math.round(minutesSinceLastWatered);
-
-    self.palmHealth = self.palmHealth - minutesSinceLastWatered;
-
-    if (self.palmHealth < 0){ self.palmHealth = 0}
-    if (self.palmHealth > 15){ self.palmHealth = 15}
-
-    console.log("minutes since last watered :" + minutesSinceLastWatered);*/
+     var wateredHowManyDaysinLastWeek = self.palmWateredDaysCheck();
+     console.log("Plant watered for " + wateredHowManyDaysinLastWeek + "days in the last week")
      console.log("new plant health minus minutes not watered : " + self.palmHealth)
   }
 
@@ -184,7 +171,7 @@ var lastSunny = _.findLastIndex(self.history, function(o) { return o.lastWeather
     if (self.daisyHealth < 0){ self.daisyHealth = 0}
     if (self.daisyHealth > 15){ self.daisyHealth = 15}
       // Time
-      var n = _.now()
+      var n = $window.moment().toObject()
       self.lastWateredPalm = n;
       self.message = "updatePlant";
       self.sendMessage();
