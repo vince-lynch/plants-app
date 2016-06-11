@@ -25,12 +25,18 @@ function MainController($auth, tokenService, $resource, $window, $state, GEOCODE
   self.message = null;
   self.username = "";
   self.hasSetUsername = false;
+  self.checkbox = false;
 
   self.setUsername = function() {
     if(self.username.length > 2) self.hasSetUsername = true;
     self.message = "login";
     self.socketlogin();
     self.message = null;
+  }
+
+  self.testbutton = function(){
+    console.log(self.checkbox)
+    self.checkbox = 50;
   }
 
 self.sevenDaysWeatherCheck = function(weather){
@@ -44,13 +50,16 @@ self.sevenDaysWeatherCheck = function(weather){
     if ($window.moment(item.lastWateredPalm).isBetween(eightdaysAgo, $window.moment())){arrayoflasteightdaysHistory.push(item)};
   });
 
-  var i = 0;
+  weatherDaysOnly = [];
   _(arrayoflasteightdaysHistory).forEach(function(item) {
     if (item.lastWeatherState == weather){
-   i = i + 1
+      var weatherDay = $window.moment(item.lastWateredPalm).format("dddd");
+      weatherDaysOnly.push(weatherDay);
    }
   });
-  return i;
+
+  whichDaysWeather = _.intersection(weatherDaysOnly, ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]);
+  return whichDaysWeather.length;
 }
 
 
@@ -114,15 +123,15 @@ self.palmWateredDaysCheck = function(){
 
 ////// cloudy times in last week
 var howManyTimesCloudy = self.sevenDaysWeatherCheck("cloudy");
-console.log("It has been cloudy " + howManyTimesCloudy+ " times in the last 7 days")
+console.log("It has been cloudy " + howManyTimesCloudy+ " days in the last 7 days")
 
 ////// sunny
 var howManyTimesSunny = self.sevenDaysWeatherCheck("sunny");
-console.log("It has been sunny " + howManyTimesSunny + " times in the last 7 days")
+console.log("It has been sunny " + howManyTimesSunny + " days in the last 7 days")
 
 ////// rainy
 var howManyTimesRainy = self.sevenDaysWeatherCheck("rainy");
-  console.log("It has been rainy " + howManyTimesRainy + " times in the last 7 days")
+  console.log("It has been rainy " + howManyTimesRainy + " days in the last 7 days")
 
 
      if (self.lastWateredPalm == undefined){
@@ -136,6 +145,8 @@ var howManyTimesRainy = self.sevenDaysWeatherCheck("rainy");
      var wateredHowManyDaysinLastWeek = self.palmWateredDaysCheck();
      console.log("Plant watered for " + wateredHowManyDaysinLastWeek + "days in the last week")
      console.log("new plant health minus minutes not watered : " + self.palmHealth)
+
+     self.howManyDaysInWeek = {palmWatered:wateredHowManyDaysinLastWeek, sunny: howManyTimesSunny, rainy: howManyTimesRainy, cloudy: howManyTimesCloudy}
   }
 
   self.socketlogin = function() {

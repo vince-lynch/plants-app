@@ -192,20 +192,3 @@ function Router($stateProvider, $urlRouterProvider){
 
     $urlRouterProvider.otherwise('/');
 }
-/*Router.$inject = ['$stateProvider', '$urlRouterProvider'];
-function Router($stateProvider, $urlRouterProvider){
-  $stateProvider
-    .state('front', {
-      url: '/', 
-      templateUrl: 'new.html'
-    })
-    .state('login', {
-      url: '/login', 
-      templateUrl: 'login.html'
-    });
-    
-
-    $urlRouterProvider.otherwise('/');
-  
-}
-*/

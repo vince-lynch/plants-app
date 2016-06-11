@@ -33,27 +33,11 @@
   </main>
 
 
-
-  <!-- <button ng-click="main.getPlant()">Login</button> -->
-
-  <!-- <button ng-click="main.updatePlant()">update plant</button>
-  <input type="text" ng-model="main.username">
-   -->
-
-
-  <div id="container" style="background-color:{{weatherBGColor}};">
-
-
-  <!-- <svg id="shelf" width="100%" height="20">
-    <rect width="100%" height="20" style="fill:rgb(0,0,0);stroke-width:3;stroke:rgb(0,0,0)" />
-  </svg> -->
+  <div id="container" style="background-color:{{weatherBGColor}};" ng-show="main.hasSetUsername">
 
   <div>
     <h2>Your plants</h2>
-  <!--   <img ng-draggable src="http://izaak.jellinek.com/tuxes/images/big%20tux.png"/>
-    <img ng-draggable src="http://fc00.deviantart.net/fs70/i/2012/135/a/7/tux_button_by_blacklite_teh_haxxor-d4zv3fv.png"/>
-    <span ng-draggable>Drag me!</span>
-    <span ng-draggable>Or me!</span> -->
+
     <div class="weathersymbol" ng-draggable id="weather" name="weather" style="position:relative;left:{{itemLocations.weatherX + 'px'}};top:{{itemLocations.weatherY + 'px'}};">
       <div class="sunny" ng-show="sunny"></div> 
      <div class="cloudy" ng-show="cloudy"></div>
@@ -63,6 +47,8 @@
       <div class="starry" ng-show="starry"></div>
       <div class="stormy" ng-show="stormy"></div>
     </div>
+
+    
     <buildpalm ng-draggable name="palm" id="palmtree" callback-fn="storeDraggableItemsLocations()" style="position:relative;left:{{itemLocations.palmX + 'px'}};top:{{itemLocations.palmY + 'px'}};"> 
 
     <svg class="stretchRight" ng-if="main.palmHealth > 14" id="palmseg10" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 114.28 112.49"><title>palmsegr5</title><path d="M325,8.74A8.5,8.5,0,0,0,320.8-7.74a160.18,160.18,0,0,0-103.7,83.62,80.08,80.08,0,0,1,1.16,28.6c4.42-6.83,8.92-13.67,13.66-20.3A143.15,143.15,0,0,1,325,8.74Z" transform="translate(-217.11 8)"/></svg>
@@ -96,12 +82,12 @@
     <svg class="pullUp" ng-if="main.palmHealth > 0" id="segmentpalm1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77 45.71"><title>palmtreesegment1</title><path d="M303.9,282.12a8.48,8.48,0,0,0-4.82,8.77l4.41,34.52c5.74,0,11.45,0,17.16.2l-3.49-27.3h40.69l-3.65,28.58c5.7,0.19,11.4.32,17.1,0.32l4.64-36.32a8.48,8.48,0,0,0-4.82-8.77l0.08-.62H303.82Z" transform="translate(-299.01 -281.5)"/></svg>
 
     <svg id="plantpot" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 153.44 133.11"><title>plant-pot</title><path d="M369.58,342.31H336.43l-0.28-2.2c-5.7-.16-11.42-0.25-17.16-0.2l0.31,2.4H284.79a8.5,8.5,0,0,0-8.5,8.5v33a8.5,8.5,0,0,0,8.5,8.5h4.81l8.3,73.18a8.5,8.5,0,0,0,8.45,7.54h93.33a8.5,8.5,0,0,0,8.45-7.54l8.3-73.18h4.8a8.5,8.5,0,0,0,8.5-8.5v-33a8.5,8.5,0,0,0-8.5-8.5H386.72l0.08-.6c-5.71,0-11.4-.13-17.1-0.32ZM392.08,456H313.93l-7.23-63.73h92.61Zm20.64-96.7v16H293.28v-16H412.72Z" transform="translate(-276.29 -339.89)"/></svg>
-
     </buildpalm>
+
     <span ng-draggable name="wateringcan" callback-fn="main.growplant()" id="wateringcan" class="shape wateringcan" ></span><!-- style="position:relative;left:{{itemLocations.wateringcanX + 'px'}};top:{{itemLocations.wateringcanY + 'px'}};" -->
   </div>
 
-<daisy ng-draggable name="daisy" id="daisy" callback-fn="storeDraggableItemsLocations()" ><!-- style="position:relative;left:{{itemLocations.daisyX + 'px'}};top:{{itemLocations.daisyY + 'px'}};" -->
+<daisy ng-draggable name="daisy" id="daisy" callback-fn="storeDraggableItemsLocations()" >
   <!-- --><svg id="daisyseg15" ng-if="main.daisyHealth > 14" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 79.7 79.69"><title>daisyseg11</title><path d="M150,175.6L149.45,170a27.06,27.06,0,0,0,3.62-1.94l4.34,3.57a8.5,8.5,0,0,0,10.8-13.13l-4.34-3.57a27.1,27.1,0,0,0,1.2-3.93l5.59-.55A8.5,8.5,0,0,0,169,133.55l-5.59.55a27,27,0,0,0-1.93-3.61l3.57-4.35a8.5,8.5,0,0,0-13.14-10.79l-3.56,4.34a27,27,0,0,0-3.93-1.2l-0.55-5.58a8.5,8.5,0,0,0-16.92,1.66l0.55,5.58a27,27,0,0,0-3.62,1.94l-4.34-3.57a8.5,8.5,0,0,0-10.8,13.13l4.34,3.57a27.18,27.18,0,0,0-1.2,3.92l-5.59.55a8.5,8.5,0,0,0,1.65,16.92l5.59-.55a27.06,27.06,0,0,0,1.94,3.62L111.9,164A8.5,8.5,0,1,0,125,174.82l3.56-4.34a27.11,27.11,0,0,0,3.92,1.2l0.55,5.59A8.5,8.5,0,1,0,150,175.6ZM139.5,155.28h-0.07a10.25,10.25,0,0,1-2-20.39h0.1a10.26,10.26,0,0,1,11.15,9.19h0A10.26,10.26,0,0,1,139.5,155.28Z" transform="translate(-98.62 -105.24)"/></svg>
   <svg id="daisyseg14" data-name="Capa 1" ng-if="main.daisyHealth > 13" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 79.7 79.69"><title>daisyseg11</title><path d="M150,175.6L149.45,170a27.06,27.06,0,0,0,3.62-1.94l4.34,3.57a8.5,8.5,0,0,0,10.8-13.13l-4.34-3.57a27.1,27.1,0,0,0,1.2-3.93l5.59-.55A8.5,8.5,0,0,0,169,133.55l-5.59.55a27,27,0,0,0-1.93-3.61l3.57-4.35a8.5,8.5,0,0,0-13.14-10.79l-3.56,4.34a27,27,0,0,0-3.93-1.2l-0.55-5.58a8.5,8.5,0,0,0-16.92,1.66l0.55,5.58a27,27,0,0,0-3.62,1.94l-4.34-3.57a8.5,8.5,0,0,0-10.8,13.13l4.34,3.57a27.18,27.18,0,0,0-1.2,3.92l-5.59.55a8.5,8.5,0,0,0,1.65,16.92l5.59-.55a27.06,27.06,0,0,0,1.94,3.62L111.9,164A8.5,8.5,0,1,0,125,174.82l3.56-4.34a27.11,27.11,0,0,0,3.92,1.2l0.55,5.59A8.5,8.5,0,1,0,150,175.6ZM139.5,155.28h-0.07a10.25,10.25,0,0,1-2-20.39h0.1a10.26,10.26,0,0,1,11.15,9.19h0A10.26,10.26,0,0,1,139.5,155.28Z" transform="translate(-98.62 -105.24)"/></svg>
   <svg id="daisyseg13" data-name="Capa 1" ng-if="main.daisyHealth > 12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 79.7 79.69"><title>daisyseg11</title><path d="M150,175.6L149.45,170a27.06,27.06,0,0,0,3.62-1.94l4.34,3.57a8.5,8.5,0,0,0,10.8-13.13l-4.34-3.57a27.1,27.1,0,0,0,1.2-3.93l5.59-.55A8.5,8.5,0,0,0,169,133.55l-5.59.55a27,27,0,0,0-1.93-3.61l3.57-4.35a8.5,8.5,0,0,0-13.14-10.79l-3.56,4.34a27,27,0,0,0-3.93-1.2l-0.55-5.58a8.5,8.5,0,0,0-16.92,1.66l0.55,5.58a27,27,0,0,0-3.62,1.94l-4.34-3.57a8.5,8.5,0,0,0-10.8,13.13l4.34,3.57a27.18,27.18,0,0,0-1.2,3.92l-5.59.55a8.5,8.5,0,0,0,1.65,16.92l5.59-.55a27.06,27.06,0,0,0,1.94,3.62L111.9,164A8.5,8.5,0,1,0,125,174.82l3.56-4.34a27.11,27.11,0,0,0,3.92,1.2l0.55,5.59A8.5,8.5,0,1,0,150,175.6ZM139.5,155.28h-0.07a10.25,10.25,0,0,1-2-20.39h0.1a10.26,10.26,0,0,1,11.15,9.19h0A10.26,10.26,0,0,1,139.5,155.28Z" transform="translate(-98.62 -105.24)"/></svg>
@@ -136,6 +122,18 @@
 
   <button ng-click="main.yahooObject()">view yahoo Object tests</button>
 
-  <button ng-click="main.analyzeHistory()">Analyze History</button>
+  <button ng-click="main.testbutton()">Test Button</button>
 
+
+  <input type="radio" name="water" class="water--0" id="r0" ng-model="main.checkbox" value="0" style="display:none">
+  <label for="r0">empty</label>
+  <input type="radio" name="water" class="water--30" id="r1" ng-model="main.checkbox" value="30" style="display:none">
+  <label for="r1">30%</label>
+  <input type="radio" name="water" class="water--50" id="r2" ng-model="main.checkbox" value="50" style="display:none">
+  <label for="r2">50%</label>
+  <input type="radio" name="water" class="water--90" id="r3" ng-model="main.checkbox" value="90" style="display:none">
+  <label for="r3">90%</label>
+
+ 
+ <h1> {{main.checkbox}}</h1>
       </div>

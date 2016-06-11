@@ -355,13 +355,13 @@ buildpalm {
 }*/
 
 #container {
-
-  display: block;
-   width: 800px;
-   height: 358px;
-   background-color: #00BBFF;
-   border-bottom: green 24px solid;
-
+    position: fixed;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #00BBFF;
+    border-bottom: green 3vh solid;
+    top: 0px;
 }
 
 .shape {
@@ -377,7 +377,7 @@ buildpalm {
 
 /*background: -webkit-linear-gradient(left, #00BBFF, #00BBFF 14.3%, #2EB5E5 14.3%, #2EB5E5 28.6%, #E6E6E6 28.6%, #E6E6E6 42.9%, #F3D166 42.9%, #F3D166 57.2%, #222233 57.2%, #222233 71.5%, #444444 71.5%, #444444 85.8%, #85DB8C 85.8%);
   background: linear-gradient(left, #00BBFF, #00BBFF 14.3%, #2EB5E5 14.3%, #2EB5E5 28.6%, #E6E6E6 28.6%, #E6E6E6 42.9%, #F3D166 42.9%, #F3D166 57.2%, #222233 57.2%, #222233 71.5%, #444444 71.5%, #444444 85.8%, #85DB8C 85.8%);*/
-  
+
 /* SUNNY */
 .sunny {
   -webkit-animation: sunny 15s linear infinite;
@@ -1066,3 +1066,227 @@ a {
   left: 600px;
 }
 
+body {
+  padding: 50px 0;
+  text-align: center;
+}
+
+input {
+  margin-bottom: 30px;
+}
+
+li.water-bottle { float:left;margin-right:15px;}
+ul { list-style-type:none; }
+
+.bottle { background: #ddd;
+    width: 62px;
+    border-radius: 23px 23px 6px 6px;
+    height: 126px;
+    padding: 6px;
+    box-shadow: 3px 3px 3px #efefef;
+    margin-bottom: 4px;}
+.bottle:hover { background: #eee;box-shadow: 2px  2px 2px #efefef;}
+
+
+.cap { 
+background: #ddd;
+    margin: 0 25px;
+    width: 46px;
+    border-radius: 8px 8px 10px 12px;
+    height: 32px;
+    position: relative;
+    left: -16px;
+    border-top: 1px solid #ddd;
+    border-bottom: 2px dotted #efefef;
+    }
+.cap-top { background:#ededed; height:6px; border-radius:10px 10px 0 0; }
+.cap-seal { margin-top:20px;background:#ccc; height:6px; border-radius: 0 0 10px 10px; }
+
+.water-full { 
+  background: lightblue;
+      width: 64px;
+      margin-top: -1px;
+      height: 122px;
+      position: relative;
+      left: -6px;
+      z-index: 1;
+      border-radius: 28px 28px 10px 10px;
+
+}
+.water-medium { background: lightblue;
+    width: 63px;
+    position: relative;
+    height: 68px;
+    margin-top: 52px;
+    left: -6px;
+    z-index: 1;
+    border-radius: 15px 15px 10px 10px;
+}
+.water-low { 
+  background: lightblue;
+      width: 65px;
+      height: 32px;
+      margin-top: 89px;
+      position: relative;
+      left: -7px;
+      z-index: 1;
+      border-radius: 28px 28px 10px 10px;
+}
+.water-empty { 
+  background: lightblue;
+  width: 63px;
+  height: 10px;
+  margin-top: 111px;
+  position: relative;
+  left: -5px;
+  z-index: 1;
+  border-radius: 28px 28px 10px 10px;
+}
+
+.cylinder {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  margin: 0 auto;
+  width: 100px;
+  height: 300px;
+  border-radius: 50px/25px;
+  background-color: rgba(160, 160, 160, 0.5);
+}
+
+.cylinder:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100px;
+  height: 50px;
+  border-radius: 50px/25px;
+  background-color: rgba(160, 160, 160, 0.2);
+  content: '';
+}
+
+.cylinder:after {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100px;
+  height: 50px;
+  border-radius: 50px/25px;
+  background-color: rgba(160, 160, 160, 0.4);
+  content: '';
+}
+
+.water {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100px;
+  height: 0;
+  padding-top: 50px;
+  border-radius: 50px/25px;
+  background-color: rgba(0, 160, 160, 0.5);
+  transition: 0.3s linear;
+}
+
+.water:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100px;
+  height: 50px;
+  border-radius: 50px/25px;
+  background-color: rgba(0, 160, 160, 0.2);
+  content: '';
+}
+
+.water:after {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100px;
+  height: 50px;
+  border-radius: 50px/25px;
+  background-color: rgba(0, 160, 160, 0.4);
+  content: '';
+}
+
+.water--0:checked ~ .cylinder .water {
+  bottom: -50px;
+}
+
+.water--30:checked ~ .cylinder .water {
+  height: calc(250px * 0.3);
+}
+
+.water--50:checked ~ .cylinder .water {
+  height: calc(250px * 0.5);
+}
+
+.water--90:checked ~ .cylinder .water {
+  height: calc(250px * 0.9);
+}
+
+dial{
+  width: 200px;
+  height: 106px;
+  margin-top: 0px;
+  position: absolute;
+  display: inline-block;
+  overflow: mn;
+}
+
+#dotcenter{
+  width: 31px;
+  left: 23px;
+  position: absolute;
+  top: 86px;
+}
+
+#handle{
+  width: 36px;
+  left: 96px;
+  position: absolute;
+  top: 94px;
+  left: 31px;
+  z-index: 3;
+}
+
+#dial0{
+  width: 67px;
+      height: 197px;
+      position: absolute;
+      display: inline-block;
+      left: 4px;
+}
+
+.circleDial{fill:#444955;}
+
+#dialseg1{
+  position: absolute;
+  display: inline-block;
+  width: 20px;
+  left: 10px;
+  top: 80px;
+}
+
+#dialseg2{
+  position: absolute;
+  display: inline-block;
+  top: 53px;
+  left: 16px;
+  height: 59px;
+  width: 47px;
+  fill: #E0C21A;
+}
+.gaugeseg2{fill:#e0c21a;}
+
+#dialseg3{
+  position: absolute;
+  display: inline-block;
+  width: 19px;
+  left: 46px;
+  top: 79px;
+  fill: #E85048;
+  z-index: 1;
+}
+.gaugeseg3{fill:#e85048;}
