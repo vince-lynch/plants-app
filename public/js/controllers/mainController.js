@@ -28,6 +28,7 @@ function MainController($auth, tokenService, $resource, $window, $state, GEOCODE
   self.checkbox = false;
 
   self.setUsername = function() {
+    console.log("trying to set username")
     if(self.username.length > 2) self.hasSetUsername = true;
     self.message = "login";
     self.socketlogin();

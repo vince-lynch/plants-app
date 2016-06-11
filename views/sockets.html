@@ -2,13 +2,41 @@
     <h1>Login</h1>
 
     <div ng-hide="main.hasSetUsername">
-      <form ng-submit="main.setUsername()">
-        <div class="form-group">
-          <input ng-model="main.username" class="form-control" placeholder="Username">
+      <div class="wrapper" ng-hide="main.hasSetUsername">
+        <div class="container" ng-hide="main.hasSetUsername">
+          <h1>Welcome</h1>
+          
+          <form class="form">
+            <input type="text" ng-model="main.username" placeholder="Username">
+            <button type="submit" ng-click="main.setUsername()" id="login-button">Grow Your Own</button>
+          </form>
         </div>
-
-        <button class="btn btn-primary">Grow Your Own</button>
-      </form>
+        
+        <ul class="bg-bubbles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div> 
+</div>
+      <script>
+      $( document ).ready(function() {
+        console.log("login js ready")
+         $("#login-button").click(function(event){
+             event.preventDefault();
+           
+           $('form').fadeOut(500);
+           $('.wrapper').addClass('form-success');
+        });
+      });
+      </script>
     </div>
 
     <div ng-show="main.turnchatON">
