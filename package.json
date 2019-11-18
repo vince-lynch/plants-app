@@ -25,7 +25,7 @@
     "jwt-simple": "^0.5.0",
     "knox": "^0.9.2",
     "moment": "^2.12.0",
-    "mongoose": "^4.4.10",
+    "mongoose": "^5.7.11",
     "mongoose-seed": "^0.1.5",
     "morgan": "^1.5.2",
     "node-phantom": "^0.2.5",
